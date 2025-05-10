@@ -1959,7 +1959,19 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN][D:/vcpkg/installed/x64-windows/include;D:/vcpkg/installed/x64-windows/include/eigen3][v()]"
+			"value" : "[pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;pcl_features;pcl_registration;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN][D:/vcpkg/installed/x64-windows/include;D:/vcpkg/installed/x64-windows/include/eigen3][v()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_2D",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding PCL_2D"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[D:/vcpkg/installed/x64-windows/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_COMMON",
@@ -1972,6 +1984,18 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "[D:/vcpkg/installed/x64-windows/lib/pcl_common.lib][D:/vcpkg/installed/x64-windows/include][v()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_FEATURES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding PCL_FEATURES"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[D:/vcpkg/installed/x64-windows/lib/pcl_features.lib][D:/vcpkg/installed/x64-windows/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_FILTERS",
@@ -2044,6 +2068,18 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "[D:/vcpkg/installed/x64-windows/lib/pcl_octree.lib][D:/vcpkg/installed/x64-windows/include][v()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_REGISTRATION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding PCL_REGISTRATION"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib][D:/vcpkg/installed/x64-windows/include][v()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_PCL_SAMPLE_CONSENSUS",
@@ -2834,6 +2870,38 @@
 			"value" : "TRUE"
 		},
 		{
+			"name" : "PCL_2D_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to 2d headers"
+				}
+			],
+			"type" : "PATH",
+			"value" : "D:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "PCL_2D_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
 			"name" : "PCL_COMMON_INCLUDE_DIR",
 			"properties" : 
 			[
@@ -2896,6 +2964,70 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "D:/vcpkg/installed/x64-windows/debug/lib/pcl_commond.lib"
+		},
+		{
+			"name" : "PCL_FEATURES_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to features headers"
+				}
+			],
+			"type" : "PATH",
+			"value" : "D:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "PCL_FEATURES_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
+			"name" : "PCL_FEATURES_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to pcl_features library"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "D:/vcpkg/installed/x64-windows/lib/pcl_features.lib"
+		},
+		{
+			"name" : "PCL_FEATURES_LIBRARY_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to pcl_features library debug"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "D:/vcpkg/installed/x64-windows/debug/lib/pcl_featuresd.lib"
 		},
 		{
 			"name" : "PCL_FILTERS_INCLUDE_DIR",
@@ -3296,6 +3428,70 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "D:/vcpkg/installed/x64-windows/debug/lib/pcl_octreed.lib"
+		},
+		{
+			"name" : "PCL_REGISTRATION_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to registration headers"
+				}
+			],
+			"type" : "PATH",
+			"value" : "D:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "PCL_REGISTRATION_INCLUDE_DIRS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
+			"name" : "PCL_REGISTRATION_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to pcl_registration library"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib"
+		},
+		{
+			"name" : "PCL_REGISTRATION_LIBRARY_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "path to pcl_registration library debug"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "D:/vcpkg/installed/x64-windows/debug/lib/pcl_registrationd.lib"
 		},
 		{
 			"name" : "PCL_SAMPLE_CONSENSUS_INCLUDE_DIR",

@@ -59,7 +59,7 @@ find_package(VTK QUIET)
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 
 # 然后查找PCL - 明确指定需要的组件
-find_package(PCL REQUIRED COMPONENTS common io filters visualization)
+find_package(PCL REQUIRED COMPONENTS common io filters visualization registration)
 
 # 添加SDK路径 - 确保使用正确的路径
 set(SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../SKD2")
@@ -123,6 +123,7 @@ set(PCL_LIBS_MANUAL
     "D:/vcpkg/installed/x64-windows/lib/pcl_filters.lib"
     "D:/vcpkg/installed/x64-windows/lib/pcl_visualization.lib"
     "D:/vcpkg/installed/x64-windows/lib/pcl_io_ply.lib"
+    "D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib"
 )
 
 # 链接库 - 使用手动指定的PCL库

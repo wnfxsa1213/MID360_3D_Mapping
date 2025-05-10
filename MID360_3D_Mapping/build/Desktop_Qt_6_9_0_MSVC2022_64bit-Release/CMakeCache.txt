@@ -408,6 +408,9 @@ OpenMP_CXX_FLAGS:STRING=-openmp
 //CXX compiler libraries for OpenMP parallelization
 OpenMP_CXX_LIB_NAMES:STRING=
 
+//path to 2d headers
+PCL_2D_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
+
 //path to common headers
 PCL_COMMON_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
 
@@ -416,6 +419,15 @@ PCL_COMMON_LIBRARY:FILEPATH=D:/vcpkg/installed/x64-windows/lib/pcl_common.lib
 
 //path to pcl_common library debug
 PCL_COMMON_LIBRARY_DEBUG:FILEPATH=D:/vcpkg/installed/x64-windows/debug/lib/pcl_commond.lib
+
+//path to features headers
+PCL_FEATURES_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
+
+//path to pcl_features library
+PCL_FEATURES_LIBRARY:FILEPATH=D:/vcpkg/installed/x64-windows/lib/pcl_features.lib
+
+//path to pcl_features library debug
+PCL_FEATURES_LIBRARY_DEBUG:FILEPATH=D:/vcpkg/installed/x64-windows/debug/lib/pcl_featuresd.lib
 
 //path to filters headers
 PCL_FILTERS_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
@@ -464,6 +476,15 @@ PCL_OCTREE_LIBRARY:FILEPATH=D:/vcpkg/installed/x64-windows/lib/pcl_octree.lib
 
 //path to pcl_octree library debug
 PCL_OCTREE_LIBRARY_DEBUG:FILEPATH=D:/vcpkg/installed/x64-windows/debug/lib/pcl_octreed.lib
+
+//path to registration headers
+PCL_REGISTRATION_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
+
+//path to pcl_registration library
+PCL_REGISTRATION_LIBRARY:FILEPATH=D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib
+
+//path to pcl_registration library debug
+PCL_REGISTRATION_LIBRARY_DEBUG:FILEPATH=D:/vcpkg/installed/x64-windows/debug/lib/pcl_registrationd.lib
 
 //path to sample_consensus headers
 PCL_SAMPLE_CONSENSUS_INCLUDE_DIR:PATH=D:/vcpkg/installed/x64-windows/include
@@ -1148,9 +1169,13 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][found components: CXX ][v2.0
 //Details about finding OpenMP_CXX
 FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-openmp][v2.0()]
 //Details about finding PCL
-FIND_PACKAGE_MESSAGE_DETAILS_PCL:INTERNAL=[pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN][D:/vcpkg/installed/x64-windows/include;D:/vcpkg/installed/x64-windows/include/eigen3][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_PCL:INTERNAL=[pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;pcl_features;pcl_registration;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN][D:/vcpkg/installed/x64-windows/include;D:/vcpkg/installed/x64-windows/include/eigen3][v()]
+//Details about finding PCL_2D
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_2D:INTERNAL=[D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_COMMON
 FIND_PACKAGE_MESSAGE_DETAILS_PCL_COMMON:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_common.lib][D:/vcpkg/installed/x64-windows/include][v()]
+//Details about finding PCL_FEATURES
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_FEATURES:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_features.lib][D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_FILTERS
 FIND_PACKAGE_MESSAGE_DETAILS_PCL_FILTERS:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_filters.lib][D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_GEOMETRY
@@ -1163,6 +1188,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_PCL_IO_PLY:INTERNAL=[D:/vcpkg/installed/x64-windows
 FIND_PACKAGE_MESSAGE_DETAILS_PCL_KDTREE:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_kdtree.lib][D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_OCTREE
 FIND_PACKAGE_MESSAGE_DETAILS_PCL_OCTREE:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_octree.lib][D:/vcpkg/installed/x64-windows/include][v()]
+//Details about finding PCL_REGISTRATION
+FIND_PACKAGE_MESSAGE_DETAILS_PCL_REGISTRATION:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib][D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_SAMPLE_CONSENSUS
 FIND_PACKAGE_MESSAGE_DETAILS_PCL_SAMPLE_CONSENSUS:INTERNAL=[D:/vcpkg/installed/x64-windows/lib/pcl_sample_consensus.lib][D:/vcpkg/installed/x64-windows/include][v()]
 //Details about finding PCL_SEARCH
@@ -1240,12 +1267,20 @@ OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL=1
 OpenMP_CXX_SPEC_DATE:INTERNAL=200203
 //Result of TRY_COMPILE
 OpenMP_SPECTEST_CXX_:INTERNAL=TRUE
+//ADVANCED property for variable: PCL_2D_INCLUDE_DIR
+PCL_2D_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_COMMON_INCLUDE_DIR
 PCL_COMMON_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_COMMON_LIBRARY
 PCL_COMMON_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_COMMON_LIBRARY_DEBUG
 PCL_COMMON_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_FEATURES_INCLUDE_DIR
+PCL_FEATURES_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_FEATURES_LIBRARY
+PCL_FEATURES_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_FEATURES_LIBRARY_DEBUG
+PCL_FEATURES_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_FILTERS_INCLUDE_DIR
 PCL_FILTERS_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_FILTERS_LIBRARY
@@ -1278,6 +1313,12 @@ PCL_OCTREE_INCLUDE_DIR-ADVANCED:INTERNAL=1
 PCL_OCTREE_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_OCTREE_LIBRARY_DEBUG
 PCL_OCTREE_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_REGISTRATION_INCLUDE_DIR
+PCL_REGISTRATION_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_REGISTRATION_LIBRARY
+PCL_REGISTRATION_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PCL_REGISTRATION_LIBRARY_DEBUG
+PCL_REGISTRATION_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_SAMPLE_CONSENSUS_INCLUDE_DIR
 PCL_SAMPLE_CONSENSUS_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PCL_SAMPLE_CONSENSUS_LIBRARY

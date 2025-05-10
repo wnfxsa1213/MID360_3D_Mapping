@@ -96,7 +96,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 129,
+				"line" : 130,
 				"parent" : 0
 			},
 			{
@@ -742,7 +742,7 @@
 			{
 				"command" : 16,
 				"file" : 1,
-				"line" : 210,
+				"line" : 211,
 				"parent" : 0
 			},
 			{
@@ -1165,12 +1165,17 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_filters.lib",
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_registration.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
 				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_visualization.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_registration.lib",
 				"role" : "libraries"
 			},
 			{
@@ -1181,11 +1186,6 @@
 			{
 				"backtrace" : 4,
 				"fragment" : "livox_lidar_sdk_static.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 4,
-				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_sample_consensus.lib",
 				"role" : "libraries"
 			},
 			{
@@ -1206,21 +1206,6 @@
 			{
 				"backtrace" : 8,
 				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\zlib.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 4,
-				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_search.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 4,
-				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_octree.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 4,
-				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_kdtree.lib",
 				"role" : "libraries"
 			},
 			{
@@ -1511,6 +1496,36 @@
 			{
 				"backtrace" : 57,
 				"fragment" : "psapi.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_features.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_filters.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_sample_consensus.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_search.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_octree.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\vcpkg\\installed\\x64-windows\\lib\\pcl_kdtree.lib",
 				"role" : "libraries"
 			},
 			{

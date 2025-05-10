@@ -83,5 +83,6 @@ private:
     // 设置
     QString configFilePath;
     bool isScanning;
+    bool autoFollowCamera;  // 自动相机跟随功能标志
 };
 #endif // MAINWINDOW_H 
