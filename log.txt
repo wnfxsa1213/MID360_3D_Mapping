@@ -1,0 +1,278 @@
+-- Building for: Visual Studio 17 2022
+-- 开始配置MID360 3D建图系统...
+-- 使用工具链文件: D:/vcpkg/scripts/buildsystems/vcpkg.cmake
+-- The CXX compiler identification is MSVC 19.43.34810.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- 项目名称: MID360_3D_Mapping, 版本: 0.1
+-- Qt路径: D:/QT6/6.9.0/msvc2022_64
+-- 为MSVC编译器添加了必要的编译选项
+-- CMAKE_PREFIX_PATH: D:/QT6/6.9.0/msvc2022_64;D:/vcpkg/installed/x64-windows
+-- 正在查找Qt6...
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- 找到Qt6: 1
+-- Qt6_DIR: D:/vcpkg/installed/x64-windows/share/Qt6
+-- Qt6Core_DIR: D:/vcpkg/installed/x64-windows/share/Qt6Core
+-- Qt6 VERSION: 6.8.3
+-- QTDIR: D:/QT6/6.9.0/msvc2022_64
+-- 正在查找Eigen3...
+-- 找到Eigen3: 1, 版本:
+-- 正在查找其他依赖库...
+-- Found ZLIB: optimized;D:/vcpkg/installed/x64-windows/lib/zlib.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/zlibd.lib (found version "1.3.1")
+CMake Warning at D:/vcpkg/installed/x64-windows/share/vtk/vtkDetectLibraryType.cmake:54 (message):
+  Failed to run `dumpbin` on D:/vcpkg/installed/x64-windows/lib/jsoncpp.lib.
+  Cannot determine shared/static library type:
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/vtk/FindJsonCpp.cmake:35 (vtk_detect_library_type)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:450 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+
+
+-- Searching for PEGTL
+-- Searching for PEGTL - found target taocpp::pegtl
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASIoss/SEACASIossConfig.cmake:95:
+  Syntax Warning in cmake code at column 45
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:685 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASIoss/SEACASIossConfig.cmake:96:
+  Syntax Warning in cmake code at column 41
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:685 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASExodus/SEACASExodusConfig.cmake:95:
+  Syntax Warning in cmake code at column 47
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/cmake/SEACASIoss/SEACASIossConfig.cmake:174 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:685 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASExodus/SEACASExodusConfig.cmake:96:
+  Syntax Warning in cmake code at column 43
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/cmake/SEACASIoss/SEACASIossConfig.cmake:174 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:685 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at C:/Program Files/CMake/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake:430 (message):
+  The package name passed to find_package_handle_standard_args() (NetCDF)
+  does not match the name of the calling package (netCDF).  This can lead to
+  problems in calling code that expects find_package() result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/vtk/FindnetCDF.cmake:33 (find_package_handle_standard_args)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)
+  D:/vcpkg/installed/x64-windows/share/external_packages/TPL-Seacas-Netcdf/TPL-Seacas-NetcdfConfig.cmake:4 (find_dependency)
+  D:/vcpkg/installed/x64-windows/share/cmake/SEACASExodus/SEACASExodusConfig.cmake:163 (include)
+  D:/vcpkg/installed/x64-windows/share/cmake/SEACASIoss/SEACASIossConfig.cmake:174 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:685 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found NetCDF: D:/vcpkg/installed/x64-windows/include (found version "4.8.1")
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASExodus/SEACASExodusConfig.cmake:95:
+  Syntax Warning in cmake code at column 47
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:779 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/cmake/SEACASExodus/SEACASExodusConfig.cmake:96:
+  Syntax Warning in cmake code at column 43
+
+  Argument not separated from preceding token by whitespace.
+Call Stack (most recent call first):
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:779 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning at D:/vcpkg/installed/x64-windows/share/vtk/vtkDetectLibraryType.cmake:54 (message):
+  Failed to run `dumpbin` on D:/vcpkg/installed/x64-windows/lib/hpdf.lib.
+  Cannot determine shared/static library type:
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/vtk/FindLibHaru.cmake:50 (vtk_detect_library_type)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/VTK-vtk-module-find-packages.cmake:920 (find_package)
+  D:/vcpkg/installed/x64-windows/share/vtk/vtk-config.cmake:162 (include)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:72 (find_package)
+
+
+-- Found LibLZMA: optimized;D:/vcpkg/installed/x64-windows/lib/lzma.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/lzma.lib (found version "5.8.1")
+-- VTK: 1
+-- 正在查找Boost...
+CMake Warning (dev) at D:/vcpkg/installed/x64-windows/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:847 (include)
+  CMakeLists.txt:76 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Boost: D:/vcpkg/installed/x64-windows/share/boost/BoostConfig.cmake (found version "1.88.0") found components: system filesystem
+-- 找到Boost: TRUE, 版本: 1.88.0
+-- 正在查找PCL...
+-- Found BZip2: D:/vcpkg/installed/x64-windows/lib/bz2.lib (found version "1.0.8")
+-- Looking for BZ2_bzCompressInit
+-- Looking for BZ2_bzCompressInit - found
+-- Found PNG: optimized;D:/vcpkg/installed/x64-windows/lib/libpng16.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/libpng16d.lib (found version "1.6.46")
+-- Found nlohmann_json: D:/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonConfig.cmake (found version "3.12.0")
+-- Found utf8cpp: D:/vcpkg/installed/x64-windows/include/utf8cpp
+-- Found Eigen3: D:/vcpkg/installed/x64-windows/include/eigen3 (found version "3.4.0")
+-- Found OpenGL: opengl32  found components: OpenGL
+-- Found EXPAT: optimized;D:/vcpkg/installed/x64-windows/lib/libexpat.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/libexpatd.lib (found version "2.7.1")
+-- Found double-conversion: D:/vcpkg/installed/x64-windows/lib/double-conversion.lib
+-- Found LZMA: optimized;D:/vcpkg/installed/x64-windows/lib/lzma.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/lzma.lib (found version "5.8.1")
+-- Found JPEG: optimized;D:/vcpkg/installed/x64-windows/lib/jpeg.lib;debug;D:/vcpkg/installed/x64-windows/debug/lib/jpeg.lib (found version "62")
+-- Found TIFF: C:/ProgramData/anaconda3/Library/lib/cmake/tiff (found version "4.5.1")
+-- Found ExprTk: D:/vcpkg/installed/x64-windows/include (found suitable version "2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932003059921817413596629043572900334295260595630738132", minimum required is "2.7")
+-- Found OpenMP_CXX: -openmp (found version "2.0")
+-- Found OpenMP: TRUE (found version "2.0") found components: CXX
+CMake Warning (dev) at D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package):
+  Policy CMP0144 is not set: find_package uses upper-case <PACKAGENAME>_ROOT
+  variables.  Run "cmake --help-policy CMP0144" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  CMake variable FLANN_ROOT is set to:
+
+    D:/vcpkg/installed/x64-windows
+
+  For compatibility, find_package is ignoring the variable, but code in a
+  .cmake module might still use it.
+Call Stack (most recent call first):
+  D:/vcpkg/installed/x64-windows/share/pcl/Modules/FindFLANN.cmake:45 (find_package)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:242 (find_package)
+  D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:287 (find_flann)
+  D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:563 (find_external_library)
+  D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)
+  CMakeLists.txt:81 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found flann version 1.9.2
+-- looking for PCL_COMMON
+-- Found PCL_COMMON: D:/vcpkg/installed/x64-windows/lib/pcl_common.lib
+-- looking for PCL_OCTREE
+-- Found PCL_OCTREE: D:/vcpkg/installed/x64-windows/lib/pcl_octree.lib
+-- looking for PCL_IO_PLY
+-- Found PCL_IO_PLY: D:/vcpkg/installed/x64-windows/lib/pcl_io_ply.lib
+-- looking for PCL_IO
+-- Found PCL_IO: D:/vcpkg/installed/x64-windows/lib/pcl_io.lib
+-- looking for PCL_KDTREE
+-- Found PCL_KDTREE: D:/vcpkg/installed/x64-windows/lib/pcl_kdtree.lib
+-- looking for PCL_SEARCH
+-- Found PCL_SEARCH: D:/vcpkg/installed/x64-windows/lib/pcl_search.lib
+-- looking for PCL_SAMPLE_CONSENSUS
+-- Found PCL_SAMPLE_CONSENSUS: D:/vcpkg/installed/x64-windows/lib/pcl_sample_consensus.lib
+-- looking for PCL_FILTERS
+-- Found PCL_FILTERS: D:/vcpkg/installed/x64-windows/lib/pcl_filters.lib
+-- looking for PCL_GEOMETRY
+-- Found PCL_GEOMETRY: D:/vcpkg/installed/x64-windows/include
+-- looking for PCL_VISUALIZATION
+-- Found PCL_VISUALIZATION: D:/vcpkg/installed/x64-windows/lib/pcl_visualization.lib
+-- looking for PCL_2D
+-- Found PCL_2D: D:/vcpkg/installed/x64-windows/include
+-- looking for PCL_FEATURES
+-- Found PCL_FEATURES: D:/vcpkg/installed/x64-windows/lib/pcl_features.lib
+-- looking for PCL_REGISTRATION
+-- Found PCL_REGISTRATION: D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib
+-- Found PCL: pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;pcl_features;pcl_registration;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN
+-- 找到PCL: 1, 版本: 1.15.0
+-- SDK_DIR: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/Livox-SDK2
+-- FAST_LIO_DIR: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/FAST-LIO
+-- 找到SDK静态库: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/Livox-SDK2/build/sdk_core/Release/livox_lidar_sdk_static.lib
+-- 已配置include目录
+-- 已配置链接目录
+-- 找到资源文件: C:/Users/13027/Desktop/360-5.10/mid360_mapping/resources/resources.qrc
+-- 找到UI资源文件: C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/ui/resources.qrc
+-- 使用的资源文件: C:/Users/13027/Desktop/360-5.10/mid360_mapping/resources/resources.qrc;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/ui/resources.qrc
+-- 正在查找源文件...
+-- APP_SOURCES: C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/app/MainWindow.cpp;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/app/MainWindow.h;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/app/main.cpp
+-- LIDAR_SOURCES: C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/lidar/LidarManager.cpp;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/lidar/LidarManager.h
+-- SLAM_SOURCES: C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/slam/FastLioProcessor.cpp;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/slam/FastLioProcessor.h
+-- UTILS_SOURCES: C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/utils/Logger.cpp;C:/Users/13027/Desktop/360-5.10/mid360_mapping/src/core/utils/Logger.h
+-- UI_SOURCES:
+-- PCL_LIBRARIES: pcl_common;pcl_octree;pcl_io_ply;pcl_io;pcl_kdtree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_visualization;pcl_features;pcl_registration;Boost::system;Boost::iostreams;Boost::filesystem;Boost::serialization;VTK::ChartsCore;VTK::CommonColor;VTK::CommonComputationalGeometry;VTK::CommonCore;VTK::CommonDataModel;VTK::CommonExecutionModel;VTK::CommonMath;VTK::CommonMisc;VTK::CommonTransforms;VTK::FiltersCore;VTK::FiltersExtraction;VTK::FiltersGeneral;VTK::FiltersGeometry;VTK::FiltersModeling;VTK::FiltersSources;VTK::ImagingCore;VTK::ImagingSources;VTK::InteractionImage;VTK::InteractionStyle;VTK::InteractionWidgets;VTK::IOCore;VTK::IOGeometry;VTK::IOImage;VTK::IOLegacy;VTK::IOPLY;VTK::RenderingAnnotation;VTK::RenderingCore;VTK::RenderingContext2D;VTK::RenderingLOD;VTK::RenderingFreeType;VTK::ViewsCore;VTK::ViewsContext2D;VTK::RenderingOpenGL2;VTK::RenderingContextOpenGL2;VTK::GUISupportQt;FLANN::FLANN
+-- PCL_LIBRARY_DIRS: D:/vcpkg/installed/x64-windows/debug/lib;D:/vcpkg/installed/x64-windows/lib
+-- PCL_INCLUDE_DIRS: D:/vcpkg/installed/x64-windows/include;D:/vcpkg/installed/x64-windows/include/eigen3
+-- PCL_DEFINITIONS: -D__SSE4_2__;-D__SSE4_1__;-D__SSSE3__;-D__SSE3__;-D__SSE2__;-D__SSE__;-DBOOST_ALL_NO_LIB
+-- 已配置可执行文件: MID360_3D_Mapping
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_common.lib
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_io.lib
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_filters.lib
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_visualization.lib
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_io_ply.lib
+-- 找到PCL库: D:/vcpkg/installed/x64-windows/lib/pcl_registration.lib
+-- 正在链接SDK静态库: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/Livox-SDK2/build/sdk_core/Release/livox_lidar_sdk_static.lib
+-- 正在链接Qt库...
+-- 正在链接PCL库...
+-- 正在链接Boost库...
+-- 已生成qt.conf
+-- 配置Windows特定设置...
+-- Qt安装路径: D:/QT6/6.9.0/msvc2022_64
+-- Qt Platform Plugins Path: D:/QT6/6.9.0/msvc2022_64/plugins/platforms
+-- 找到配置目录: C:/Users/13027/Desktop/360-5.10/mid360_mapping/config
+-- CMAKE_BINARY_DIR: C:/Users/13027/Desktop/360-5.10/mid360_mapping/build
+-- PROJECT_NAME: MID360_3D_Mapping
+-- SDK_DIR: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/Livox-SDK2
+-- FAST_LIO_DIR: C:/Users/13027/Desktop/360-5.10/mid360_mapping/third_party/FAST-LIO
+-- 配置完成！
+-- Configuring done (20.5s)
+-- Generating done (1.7s)
+-- Build files have been written to: C:/Users/13027/Desktop/360-5.10/mid360_mapping/build
+PS C:\Users\13027\Desktop\360-5.10\mid360_mapping\build>

@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_MID360_3D_Mapping_FILE C:/Users/13027/Desktop/360mid/BIN/bin/MID360_3D_Mapping.exe)
+set(__QT_DEPLOY_TARGET_MID360_3D_Mapping_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_MID360_3D_Mapping_RUNTIME_DLLS D:/vcpkg/installed/x64-windows/bin/Qt6OpenGLWidgets.dll;D:/vcpkg/installed/x64-windows/bin/boost_filesystem-vc143-mt-x64-1_88.dll;D:/vcpkg/installed/x64-windows/bin/Qt6Widgets.dll;D:/vcpkg/installed/x64-windows/bin/Qt6OpenGL.dll;D:/vcpkg/installed/x64-windows/bin/Qt6Gui.dll;D:/vcpkg/installed/x64-windows/bin/Qt6Core.dll;D:/vcpkg/installed/x64-windows/bin/boost_system-vc143-mt-x64-1_88.dll;D:/vcpkg/installed/x64-windows/bin/boost_atomic-vc143-mt-x64-1_88.dll)

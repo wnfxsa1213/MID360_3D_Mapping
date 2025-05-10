@@ -1,0 +1,8 @@
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/MID360_3D_Mapping.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/edit_cache.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/rebuild_cache.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/list_install_components.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/install.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/install/local.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/MID360_3D_Mapping_autogen_timestamp_deps.dir
+C:/Users/13027/Desktop/360mid/BIN/CMakeFiles/MID360_3D_Mapping_autogen.dir

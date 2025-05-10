@@ -106,7 +106,7 @@ cmake --build . --config Release
 - [x] 基础框架搭建（Qt + PCL）
 - [x] 激光雷达数据采集
 - [x] 基础点云可视化
-- [ ] IMU与点云同步和去畸变
+- [x] IMU与点云同步和去畸变
 - [ ] 特征提取与配准
 - [ ] 滑窗优化
 - [ ] 地图管理与优化
@@ -119,15 +119,7 @@ cmake --build . --config Release
 3. 集成滑窗优化与地图管理功能
 4. 优化系统性能和可视化效果
 
-## 贡献指南
 
-欢迎参与本项目的开发！如果您有兴趣，请遵循以下步骤：
-
-1. Fork本仓库
-2. 创建您的特性分支 (`git checkout -b feature/amazing-feature`)
-3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建Pull Request
 
 ## 参考资料
 
