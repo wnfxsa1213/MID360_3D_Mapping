@@ -1,5 +1,0 @@
-C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/MID360_3D_Mapping.dir
-C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/edit_cache.dir
-C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/rebuild_cache.dir
-C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/MID360_3D_Mapping_autogen_timestamp_deps.dir
-C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/MID360_3D_Mapping_autogen.dir
