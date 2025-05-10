@@ -63,8 +63,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-i7xzas"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-i7xzas"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-27emnv"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-27emnv"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -78,11 +78,11 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-i7xzas'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-27emnv'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_12827
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_12827.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_12827.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_12827.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_12827.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_12827.exe /implib:cmTC_12827.lib /pdb:cmTC_12827.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_f2956
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_f2956.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_f2956.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_f2956.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f2956.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_f2956.exe /implib:cmTC_f2956.lib /pdb:cmTC_f2956.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -
@@ -130,8 +130,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-uecnfu"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-uecnfu"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-dus74k"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-dus74k"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -145,13 +145,13 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-uecnfu'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-dus74k'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_d1c8a
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_d1c8a.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_d1c8a.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-uecnfu\\src.cxx
-        \x1b[31mFAILED: \x1b[0mCMakeFiles/cmTC_d1c8a.dir/src.cxx.obj 
-        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_d1c8a.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_d1c8a.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-uecnfu\\src.cxx
-        C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-uecnfu\\src.cxx(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_acc5d
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_acc5d.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_acc5d.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-dus74k\\src.cxx
+        \x1b[31mFAILED: \x1b[0mCMakeFiles/cmTC_acc5d.dir/src.cxx.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_acc5d.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_acc5d.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-dus74k\\src.cxx
+        C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-dus74k\\src.cxx(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -171,8 +171,8 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-sh1jw5"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-sh1jw5"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-cp6fyr"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-cp6fyr"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -186,14 +186,14 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-sh1jw5'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-cp6fyr'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_4ec8e
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_4ec8e.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_4ec8e.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-sh1jw5\\CheckFunctionExists.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_4ec8e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4ec8e.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_4ec8e.exe /implib:cmTC_4ec8e.lib /pdb:cmTC_4ec8e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
-        \x1b[31mFAILED: \x1b[0mcmTC_4ec8e.exe 
-        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_4ec8e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4ec8e.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_4ec8e.exe /implib:cmTC_4ec8e.lib /pdb:cmTC_4ec8e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4ec8e.dir\\CheckFunctionExists.cxx.obj /out:cmTC_4ec8e.exe /implib:cmTC_4ec8e.lib /pdb:cmTC_4ec8e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_4ec8e.dir/intermediate.manifest CMakeFiles\\cmTC_4ec8e.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_c46d5
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_c46d5.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_c46d5.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-cp6fyr\\CheckFunctionExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_c46d5.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c46d5.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_c46d5.exe /implib:cmTC_c46d5.lib /pdb:cmTC_c46d5.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        \x1b[31mFAILED: \x1b[0mcmTC_c46d5.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_c46d5.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c46d5.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_c46d5.exe /implib:cmTC_c46d5.lib /pdb:cmTC_c46d5.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c46d5.dir\\CheckFunctionExists.cxx.obj /out:cmTC_c46d5.exe /implib:cmTC_c46d5.lib /pdb:cmTC_c46d5.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_c46d5.dir/intermediate.manifest CMakeFiles\\cmTC_c46d5.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthreads.lib”\x0d
         ninja: build stopped: subcommand failed.
         
@@ -214,8 +214,8 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-16xks9"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-16xks9"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nhhiez"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nhhiez"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -229,14 +229,14 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-16xks9'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nhhiez'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_a91cb
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_a91cb.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_a91cb.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-16xks9\\CheckFunctionExists.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_a91cb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a91cb.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_a91cb.exe /implib:cmTC_a91cb.lib /pdb:cmTC_a91cb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
-        \x1b[31mFAILED: \x1b[0mcmTC_a91cb.exe 
-        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_a91cb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a91cb.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_a91cb.exe /implib:cmTC_a91cb.lib /pdb:cmTC_a91cb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a91cb.dir\\CheckFunctionExists.cxx.obj /out:cmTC_a91cb.exe /implib:cmTC_a91cb.lib /pdb:cmTC_a91cb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_a91cb.dir/intermediate.manifest CMakeFiles\\cmTC_a91cb.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_a084e
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_a084e.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_a084e.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-nhhiez\\CheckFunctionExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_a084e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a084e.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_a084e.exe /implib:cmTC_a084e.lib /pdb:cmTC_a084e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        \x1b[31mFAILED: \x1b[0mcmTC_a084e.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_a084e.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a084e.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_a084e.exe /implib:cmTC_a084e.lib /pdb:cmTC_a084e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a084e.dir\\CheckFunctionExists.cxx.obj /out:cmTC_a084e.exe /implib:cmTC_a084e.lib /pdb:cmTC_a084e.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_a084e.dir/intermediate.manifest CMakeFiles\\cmTC_a084e.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthread.lib”\x0d
         ninja: build stopped: subcommand failed.
         
@@ -259,8 +259,8 @@ events:
     checks:
       - "Performing Test HAVE_STDATOMIC"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nw5lfu"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nw5lfu"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-lybjyd"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-lybjyd"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -274,11 +274,11 @@ events:
       variable: "HAVE_STDATOMIC"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nw5lfu'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-lybjyd'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_1a0e8
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DHAVE_STDATOMIC  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_1a0e8.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_1a0e8.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-nw5lfu\\src.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_1a0e8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_1a0e8.dir\\src.cxx.obj  /out:cmTC_1a0e8.exe /implib:cmTC_1a0e8.lib /pdb:cmTC_1a0e8.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_91700
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DHAVE_STDATOMIC  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_91700.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_91700.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-lybjyd\\src.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_91700.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_91700.dir\\src.cxx.obj  /out:cmTC_91700.exe /implib:cmTC_91700.lib /pdb:cmTC_91700.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -
@@ -303,8 +303,8 @@ events:
     checks:
       - "Looking for BZ2_bzCompressInit"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kp05i4"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kp05i4"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kf3prj"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kf3prj"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -318,11 +318,11 @@ events:
       variable: "BZIP2_NEED_PREFIX"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kp05i4'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kf3prj'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_46cc0
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP  -ID:\\vcpkg\\installed\\x64-windows\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_46cc0.dir\\CheckSymbolExists.cxx.obj /FdCMakeFiles\\cmTC_46cc0.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-kp05i4\\CheckSymbolExists.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_46cc0.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_46cc0.dir\\CheckSymbolExists.cxx.obj  /out:cmTC_46cc0.exe /implib:cmTC_46cc0.lib /pdb:cmTC_46cc0.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  D:\\vcpkg\\installed\\x64-windows\\lib\\bz2.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_ffb10
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP  -ID:\\vcpkg\\installed\\x64-windows\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_ffb10.dir\\CheckSymbolExists.cxx.obj /FdCMakeFiles\\cmTC_ffb10.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-kf3prj\\CheckSymbolExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_ffb10.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ffb10.dir\\CheckSymbolExists.cxx.obj  /out:cmTC_ffb10.exe /implib:cmTC_ffb10.lib /pdb:cmTC_ffb10.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  D:\\vcpkg\\installed\\x64-windows\\lib\\bz2.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -
@@ -337,8 +337,8 @@ events:
       - "CMakeLists.txt:62 (find_package)"
     description: "Detecting CXX OpenMP compiler info"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-gvkrlr"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-gvkrlr"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-yv2osr"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-yv2osr"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -352,11 +352,11 @@ events:
       variable: "OpenMP_COMPILE_RESULT_CXX_openmp"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-gvkrlr'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-yv2osr'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_41ec6
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_41ec6.dir\\OpenMPTryFlag.cpp.obj /FdCMakeFiles\\cmTC_41ec6.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-gvkrlr\\OpenMPTryFlag.cpp
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_41ec6.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_41ec6.dir\\OpenMPTryFlag.cpp.obj  /out:cmTC_41ec6.exe /implib:cmTC_41ec6.lib /pdb:cmTC_41ec6.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_09d83
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_09d83.dir\\OpenMPTryFlag.cpp.obj /FdCMakeFiles\\cmTC_09d83.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-yv2osr\\OpenMPTryFlag.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_09d83.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_09d83.dir\\OpenMPTryFlag.cpp.obj  /out:cmTC_09d83.exe /implib:cmTC_09d83.lib /pdb:cmTC_09d83.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
   -
@@ -371,8 +371,8 @@ events:
       - "CMakeLists.txt:62 (find_package)"
     description: "Detecting CXX OpenMP version"
     directories:
-      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kgzscy"
-      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kgzscy"
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-xtyp08"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-xtyp08"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -386,11 +386,11 @@ events:
       variable: "OpenMP_SPECTEST_CXX_"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-kgzscy'
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-xtyp08'
         
-        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_625c3
-        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_625c3.dir\\OpenMPCheckVersion.cpp.obj /FdCMakeFiles\\cmTC_625c3.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-kgzscy\\OpenMPCheckVersion.cpp
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_625c3.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_625c3.dir\\OpenMPCheckVersion.cpp.obj  /out:cmTC_625c3.exe /implib:cmTC_625c3.lib /pdb:cmTC_625c3.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_e5ce8
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_e5ce8.dir\\OpenMPCheckVersion.cpp.obj /FdCMakeFiles\\cmTC_e5ce8.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-xtyp08\\OpenMPCheckVersion.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_e5ce8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e5ce8.dir\\OpenMPCheckVersion.cpp.obj  /out:cmTC_e5ce8.exe /implib:cmTC_e5ce8.lib /pdb:cmTC_e5ce8.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
         
       exitCode: 0
 ...

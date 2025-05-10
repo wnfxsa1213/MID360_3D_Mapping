@@ -14,10 +14,13 @@ static size_t total_packets_count = 0; // 计数收到的数据包数量
 static uint64_t last_publish_time = 0; // 上次发布点云的时间
 
 LidarManager::LidarManager(QObject *parent)
-    : QObject(parent), connected(false), scanning(false)
+    : QObject(parent), connected(false), scanning(false), imuEnabled(false)
 {
     // 初始化点云指针
     latestCloud.reset(new pcl::PointCloud<pcl::PointXYZI>());
+    
+    // 初始化IMU数据
+    latestImuData = {};
 }
 
 LidarManager::~LidarManager()
@@ -69,10 +72,18 @@ bool LidarManager::initialize(const QString &configFilePath)
             // 将SDK回调转换为我们的回调格式
             LidarManager* manager = static_cast<LidarManager*>(client_data);
             if (manager && data) {
-                // 计算完整的数据包大小
-                uint32_t total_size = sizeof(LivoxLidarEthernetPacket) + 
-                                    data->dot_num * sizeof(LivoxLidarCartesianHighRawPoint);
-                manager->handleLidarData(handle, reinterpret_cast<const uint8_t*>(data), total_size);
+                // 检查数据类型
+                if (data->data_type == kLivoxLidarCartesianCoordinateHighData) {
+                    // 计算完整的数据包大小
+                    uint32_t total_size = sizeof(LivoxLidarEthernetPacket) + 
+                                        data->dot_num * sizeof(LivoxLidarCartesianHighRawPoint);
+                    manager->handleLidarData(handle, reinterpret_cast<const uint8_t*>(data), total_size);
+                } else if (data->data_type == kLivoxLidarImuData) {
+                    // 处理IMU数据
+                    uint32_t total_size = sizeof(LivoxLidarEthernetPacket) + 
+                                       sizeof(LivoxLidarImuRawPoint);
+                    manager->handleImuData(handle, reinterpret_cast<const uint8_t*>(data), total_size);
+                }
             } else {
                 qDebug() << "点云数据回调参数无效: manager=" << (manager != nullptr) << " data=" << (data != nullptr);
             }
@@ -116,6 +127,28 @@ bool LidarManager::initialize(const QString &configFilePath)
         }, 
         this
     );
+
+    // 配置IMU数据
+    QJsonDocument jsonDoc;
+    if (file.open(QIODevice::ReadOnly)) {
+        jsonDoc = QJsonDocument::fromJson(file.readAll());
+        file.close();
+    }
+
+    if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+        QJsonObject rootObj = jsonDoc.object();
+        
+        // 检查是否启用IMU
+        if (rootObj.contains("FastLio") && rootObj["FastLio"].isObject()) {
+            QJsonObject fastLioObj = rootObj["FastLio"].toObject();
+            if (fastLioObj.contains("use_imu_data")) {
+                bool useImu = fastLioObj["use_imu_data"].toBool();
+                if (useImu) {
+                    enableImu(true);
+                }
+            }
+        }
+    }
     
     // 标记为已连接
     connected = true;
@@ -298,15 +331,21 @@ void LidarManager::handleLidarData(uint32_t handle, const uint8_t *data, uint32_
         cloud->height = 1;
         cloud->is_dense = true;
 
-        // 更新最新点云
-        {
-            QMutexLocker locker(&mutex);
-            *latestCloud = *cloud;
+        // 提取点云帧采集区间（起始和终止时间戳）
+        uint64_t cloud_start = 0;
+        uint64_t cloud_end = 0;
+        for (int i = 0; i < 8; i++) {
+            cloud_start |= static_cast<uint64_t>(packet->timestamp[i]) << (i * 8);
         }
+        cloud_end = cloud_start; // 假设单包帧，如有帧持续时间可加上
+
+        // 调用FastLioProcessor的processPointCloudWithTimestamp接口
+        emit pointCloudWithTimestamp(cloud, cloud_start);
         emit pointCloudReceived(cloud);
         qDebug() << "合成一帧点云，点数:" << cloud->size() 
                  << "，包含" << total_packets_count << "个数据包"
-                 << "，耗时:" << (current_time - last_publish_time) << "毫秒";
+                 << "，耗时:" << (current_time - last_publish_time) << "毫秒"
+                 << "，时间戳区间:[" << cloud_start << ", " << cloud_end << "]";
         
         // 重置状态
         frame_buffer.clear();
@@ -425,4 +464,98 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr LidarManager::convertToPointCloud(const uin
     qDebug() << "点云转换完成，实际点数:" << cloud->size();
     
     return cloud;
+}
+
+bool LidarManager::isImuEnabled() const 
+{
+    return imuEnabled;
+}
+
+void LidarManager::enableImu(bool enable)
+{
+    if (imuEnabled == enable) {
+        return; // 已经是所需状态
+    }
+
+    imuEnabled = enable;
+    
+    if (!connected) {
+        return; // 未连接时无法设置
+    }
+
+    uint32_t handle = 50440384; // 使用从日志中看到的实际handle值
+    
+    // 使用SDK中正确的函数启用/禁用IMU数据
+    if (enable) {
+        EnableLivoxLidarImuData(handle, 
+            [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
+                if (status == kLivoxLidarStatusSuccess) {
+                    qDebug() << "启用IMU数据成功";
+                } else {
+                    qDebug() << "启用IMU数据失败，状态码: " << status;
+                }
+            }, 
+            nullptr);
+    } else {
+        DisableLivoxLidarImuData(handle, 
+            [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
+                if (status == kLivoxLidarStatusSuccess) {
+                    qDebug() << "禁用IMU数据成功";
+                } else {
+                    qDebug() << "禁用IMU数据失败，状态码: " << status;
+                }
+            }, 
+            nullptr);
+    }
+    
+    qDebug() << "IMU数据已" << (enable ? "启用" : "禁用");
+}
+
+void LidarManager::handleImuData(uint32_t handle, const uint8_t *data, uint32_t data_num)
+{
+    if (!imuEnabled) {
+        return; // IMU未启用，忽略数据
+    }
+    
+    // 解析数据包
+    if (data_num < sizeof(LivoxLidarEthernetPacket) + sizeof(LivoxLidarImuRawPoint)) {
+        qWarning() << "IMU数据包大小不足";
+        return;
+    }
+    
+    const LivoxLidarEthernetPacket* packet = reinterpret_cast<const LivoxLidarEthernetPacket*>(data);
+    const LivoxLidarImuRawPoint* imu_data = reinterpret_cast<const LivoxLidarImuRawPoint*>(packet->data);
+    
+    // 解析时间戳 - 假设时间戳是8字节的
+    uint64_t timestamp = 0;
+    for (int i = 0; i < 8; i++) {
+        timestamp |= static_cast<uint64_t>(packet->timestamp[i]) << (i * 8);
+    }
+    
+    // 更新IMU数据
+    ImuData imuData;
+    imuData.gyro_x = imu_data->gyro_x;
+    imuData.gyro_y = imu_data->gyro_y;
+    imuData.gyro_z = imu_data->gyro_z;
+    imuData.acc_x = imu_data->acc_x;
+    imuData.acc_y = imu_data->acc_y;
+    imuData.acc_z = imu_data->acc_z;
+    imuData.timestamp = timestamp;
+    
+    // 保存最新IMU数据
+    {
+        QMutexLocker locker(&mutex);
+        latestImuData = imuData;
+    }
+    
+    // 发出信号
+    emit imuDataReceived(imuData);
+    
+    qDebug() << "收到IMU数据: gyro(" 
+             << imuData.gyro_x << "," 
+             << imuData.gyro_y << "," 
+             << imuData.gyro_z << ") acc("
+             << imuData.acc_x << ","
+             << imuData.acc_y << ","
+             << imuData.acc_z << ")";
 } 

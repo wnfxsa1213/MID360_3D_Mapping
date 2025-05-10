@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../src/FastLioProcessor.h"
+#include "../../../../include/FastLioProcessor.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -50,7 +50,13 @@ static constexpr auto qt_meta_stringdata_ZN16FastLioProcessorE = QtMocHelpers::s
     "processorError",
     "errorMessage",
     "processPointCloud",
-    "cloud"
+    "cloud",
+    "processImuData",
+    "ImuData",
+    "imuData",
+    "processPointCloudWithTimestamp",
+    "uint64_t",
+    "cloudTimestamp"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -62,7 +68,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN16FastLioProcessorE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,13 +76,15 @@ Q_CONSTINIT static const uint qt_meta_data_ZN16FastLioProcessorE[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   44,    2, 0x06,    1 /* Public */,
-       5,    1,   47,    2, 0x06,    3 /* Public */,
-       7,    1,   50,    2, 0x06,    5 /* Public */,
-      10,    1,   53,    2, 0x06,    7 /* Public */,
+       1,    1,   56,    2, 0x06,    1 /* Public */,
+       5,    1,   59,    2, 0x06,    3 /* Public */,
+       7,    1,   62,    2, 0x06,    5 /* Public */,
+      10,    1,   65,    2, 0x06,    7 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      12,    1,   56,    2, 0x0a,    9 /* Public */,
+      12,    1,   68,    2, 0x0a,    9 /* Public */,
+      14,    1,   71,    2, 0x0a,   11 /* Public */,
+      17,    2,   74,    2, 0x0a,   13 /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -86,6 +94,8 @@ Q_CONSTINIT static const uint qt_meta_data_ZN16FastLioProcessorE[] = {
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,   13,
+    QMetaType::Void, 0x80000000 | 15,   16,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 18,   13,   19,
 
        0        // eod
 };
@@ -113,7 +123,14 @@ Q_CONSTINIT const QMetaObject FastLioProcessor::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'processPointCloud'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>
+        QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>,
+        // method 'processImuData'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const ImuData &, std::false_type>,
+        // method 'processPointCloudWithTimestamp'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>,
+        QtPrivate::TypeAndForceComplete<uint64_t, std::false_type>
     >,
     nullptr
 } };
@@ -128,6 +145,8 @@ void FastLioProcessor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 2: _t->poseUpdated((*reinterpret_cast< std::add_pointer_t<Eigen::Matrix4f>>(_a[1]))); break;
         case 3: _t->processorError((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 4: _t->processPointCloud((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1]))); break;
+        case 5: _t->processImuData((*reinterpret_cast< std::add_pointer_t<ImuData>>(_a[1]))); break;
+        case 6: _t->processPointCloudWithTimestamp((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[2]))); break;
         default: ;
         }
     }
@@ -183,14 +202,14 @@ int FastLioProcessor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

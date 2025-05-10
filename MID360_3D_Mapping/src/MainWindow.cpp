@@ -13,7 +13,9 @@
 #include <QMutexLocker>
 #include <QDebug>
 #include <QCheckBox>
-
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
+#include "Logger.h"
 #include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkNew.h>
 #include <vtkRenderer.h>
@@ -21,45 +23,156 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(nullptr), isScanning(false), autoFollowCamera(true)
 {
-    // 初始化点云指针
-    currentCloud.reset(new pcl::PointCloud<pcl::PointXYZI>());
-    globalMap.reset(new pcl::PointCloud<pcl::PointXYZI>());
-    
-    // 设置窗口标题和大小
-    setWindowTitle("MID360 3D Mapping");
-    resize(1200, 800);
-    
-    // 设置UI
-    setupUI();
-    
-    // 初始化设置
-    initializeSettings();
-    
-    // 初始化PCL可视化
-    initializePclVisualizer();
-    
-    // 创建激光雷达管理器和Fast-LIO处理器
-    lidarManager = new LidarManager();
-    fastLioProcessor = new FastLioProcessor();
-    
-    // 将管理器和处理器移动到线程中
-    lidarManager->moveToThread(&lidarThread);
-    fastLioProcessor->moveToThread(&processorThread);
-    
-    // 连接信号和槽
-    connectSignals();
-    
-    // 加载配置文件
-    loadConfigFile();
-    
-    // 启动线程
-    lidarThread.start();
-    processorThread.start();
-    
-    // 启动可视化定时器
-    visualizerTimer = new QTimer(this);
-    connect(visualizerTimer, &QTimer::timeout, this, &MainWindow::onUpdatePointCloud);
-    visualizerTimer->start(33); // 约30 FPS
+    try {
+        // 初始化点云指针
+        currentCloud.reset(new pcl::PointCloud<pcl::PointXYZI>());
+        globalMap.reset(new pcl::PointCloud<pcl::PointXYZI>());
+        
+        // 设置窗口标题和大小
+        setWindowTitle("MID360 3D Mapping");
+        resize(1200, 800);
+        
+        // 设置UI
+        setupUI();
+        
+        // 初始化设置
+        initializeSettings();
+        
+        try {
+            // 初始化PCL可视化
+            LOG_INFO("正在初始化PCL可视化...");
+            initializePclVisualizer();
+            LOG_INFO("PCL可视化初始化完成");
+        } catch (const std::exception& e) {
+            LOG_ERROR(QString("PCL可视化初始化失败: %1").arg(e.what()));
+            QMessageBox::warning(this, "警告", QString("PCL可视化初始化失败: %1\n程序将尝试继续运行。").arg(e.what()));
+        } catch (...) {
+            LOG_ERROR("PCL可视化初始化失败，发生未知错误");
+            QMessageBox::warning(this, "警告", "PCL可视化初始化失败，发生未知错误\n程序将尝试继续运行。");
+        }
+        
+        try {
+            // 创建激光雷达管理器和Fast-LIO处理器
+            LOG_INFO("正在创建激光雷达管理器...");
+            lidarManager = new LidarManager();
+            LOG_INFO("正在创建Fast-LIO处理器...");
+            fastLioProcessor = new FastLioProcessor();
+            LOG_INFO("组件创建完成");
+            
+            // 将管理器和处理器移动到线程中
+            lidarManager->moveToThread(&lidarThread);
+            fastLioProcessor->moveToThread(&processorThread);
+            
+            // 连接信号和槽
+            LOG_INFO("正在连接信号和槽...");
+            connectSignals();
+            LOG_INFO("信号和槽连接完成");
+            
+            // 加载配置文件
+            LOG_INFO("准备加载配置文件...");
+            try {
+                loadConfigFile();
+                LOG_INFO("配置文件加载完成");
+            } catch (const std::exception& e) {
+                LOG_FATAL(QString("加载配置文件时发生异常: %1").arg(e.what()));
+                QMessageBox::critical(this, "致命错误", QString("加载配置文件时发生异常: %1").arg(e.what()));
+                throw; // 重新抛出异常，让main函数处理
+            } catch (...) {
+                LOG_FATAL("加载配置文件时发生未知异常");
+                QMessageBox::critical(this, "致命错误", "加载配置文件时发生未知异常");
+                throw; // 重新抛出异常，让main函数处理
+            }
+            
+            // 启动线程
+            LOG_INFO("正在启动线程...");
+            try {
+                lidarThread.start();
+                processorThread.start();
+                LOG_INFO("线程启动完成");
+            } catch (const std::exception& e) {
+                LOG_FATAL(QString("启动线程时发生异常: %1").arg(e.what()));
+                QMessageBox::critical(this, "致命错误", QString("启动线程时发生异常: %1").arg(e.what()));
+                throw;
+            } catch (...) {
+                LOG_FATAL("启动线程时发生未知异常");
+                QMessageBox::critical(this, "致命错误", "启动线程时发生未知异常");
+                throw;
+            }
+            
+            // 创建并启动可视化定时器
+            LOG_INFO("正在创建可视化定时器...");
+            try {
+                visualizerTimer = new QTimer(this);
+                LOG_INFO("可视化定时器创建完成");
+                
+                // 在这里连接定时器信号，使用新式连接语法
+                LOG_INFO("连接定时器timeout信号...");
+                connect(visualizerTimer, &QTimer::timeout, this, &MainWindow::onUpdatePointCloud);
+                LOG_INFO("定时器信号连接完成");
+                
+                // 创建辅助定时器，用于性能调整
+                adaptiveTimerCounter = 0;
+            } catch (const std::exception& e) {
+                LOG_FATAL(QString("创建可视化定时器时发生异常: %1").arg(e.what()));
+                QMessageBox::critical(this, "致命错误", QString("创建可视化定时器时发生异常: %1").arg(e.what()));
+                throw;
+            } catch (...) {
+                LOG_FATAL("创建可视化定时器时发生未知异常");
+                QMessageBox::critical(this, "致命错误", "创建可视化定时器时发生未知异常");
+                throw;
+            }
+            
+            LOG_INFO("正在启动可视化定时器...");
+            try {
+                if (!visualizerTimer) {
+                    LOG_ERROR("可视化定时器未创建");
+                    throw std::runtime_error("可视化定时器未创建");
+                }
+                
+                // 使用低频率启动定时器，降低初始化阶段资源消耗
+                visualizerTimer->start(100); // 先使用较低频率(100ms)，之后可以调整为更高频率
+                LOG_INFO("可视化定时器启动完成, 初始刷新率: 10fps");
+                
+                // 稍后自动提高刷新率
+                QTimer::singleShot(5000, this, [this]() {
+                    if (visualizerTimer) {
+                        visualizerTimer->setInterval(50); // 5秒后提高到20fps
+                        LOG_INFO("可视化定时器刷新率提升至: 20fps");
+                    }
+                });
+                
+                // 再稍后进一步提高刷新率
+                QTimer::singleShot(10000, this, [this]() {
+                    if (visualizerTimer) {
+                        visualizerTimer->setInterval(33); // 10秒后提高到30fps
+                        LOG_INFO("可视化定时器刷新率提升至: 30fps");
+                    }
+                });
+            } catch (const std::exception& e) {
+                LOG_FATAL(QString("启动可视化定时器时发生异常: %1").arg(e.what()));
+                QMessageBox::critical(this, "致命错误", QString("启动可视化定时器时发生异常: %1").arg(e.what()));
+                throw;
+            } catch (...) {
+                LOG_FATAL("启动可视化定时器时发生未知异常");
+                QMessageBox::critical(this, "致命错误", "启动可视化定时器时发生未知异常");
+                throw;
+            }
+        } catch (const std::exception& e) {
+            LOG_FATAL(QString("组件初始化失败: %1").arg(e.what()));
+            QMessageBox::critical(this, "致命错误", QString("组件初始化失败: %1").arg(e.what()));
+            throw; // 重新抛出异常，让main函数处理
+        } catch (...) {
+            LOG_FATAL("组件初始化失败，发生未知错误");
+            QMessageBox::critical(this, "致命错误", "组件初始化失败，发生未知错误");
+            throw; // 重新抛出异常，让main函数处理
+        }
+    } catch (const std::exception& e) {
+        LOG_FATAL(QString("MainWindow构造函数异常: %1").arg(e.what()));
+        throw; // 重新抛出异常，让main函数处理
+    } catch (...) {
+        LOG_FATAL("MainWindow构造函数发生未知异常");
+        throw; // 重新抛出异常，让main函数处理
+    }
 }
 
 MainWindow::~MainWindow()
@@ -186,29 +299,77 @@ void MainWindow::setupUI()
 
 void MainWindow::connectSignals()
 {
-    // 连接激光雷达信号 - 使用新式连接语法
-    connect(lidarManager, &LidarManager::pointCloudReceived, 
-            fastLioProcessor, &FastLioProcessor::processPointCloud,
-            Qt::QueuedConnection);
-    
-    connect(lidarManager, &LidarManager::lidarStatusChanged, 
-            this, &MainWindow::onLidarStatusChanged);
-    
-    connect(lidarManager, &LidarManager::lidarError, 
-            this, &MainWindow::onLidarError);
-    
-    // 连接Fast-LIO处理器信号 - 使用新式连接语法
-    connect(fastLioProcessor, &FastLioProcessor::processFinished, 
-            this, &MainWindow::onProcessFinished);
-    
-    connect(fastLioProcessor, &FastLioProcessor::globalMapUpdated, 
-            this, &MainWindow::onGlobalMapUpdated);
-    
-    connect(fastLioProcessor, &FastLioProcessor::poseUpdated, 
-            this, &MainWindow::onPoseUpdated);
-    
-    connect(fastLioProcessor, &FastLioProcessor::processorError, 
-            this, &MainWindow::onProcessorError);
+    try {
+        LOG_INFO("开始连接激光雷达信号...");
+        // 先检查对象是否有效
+        if (!lidarManager || !fastLioProcessor) {
+            LOG_ERROR("组件对象为空，无法连接信号");
+            throw std::runtime_error("组件对象为空，无法连接信号");
+        }
+        
+        // 连接点云与IMU同步信号 - 用于高精度SLAM/建图
+        connect(lidarManager, &LidarManager::pointCloudWithTimestamp,
+                fastLioProcessor, &FastLioProcessor::processPointCloudWithTimestamp);
+        LOG_INFO("点云与IMU同步信号连接完成 - 用于SLAM/建图");
+        
+        // 连接点云信号 - 用于实时可视化
+        connect(lidarManager, &LidarManager::pointCloudReceived,
+                this, &MainWindow::onPointCloudReceived);
+        LOG_INFO("点云数据信号连接完成 - 用于可视化");
+        
+        // 连接IMU数据信号
+        LOG_INFO("开始连接IMU数据信号...");
+        connect(lidarManager, &LidarManager::imuDataReceived,
+                fastLioProcessor, &FastLioProcessor::processImuData);
+        LOG_INFO("IMU数据信号连接完成");
+        
+        connect(lidarManager, &LidarManager::lidarStatusChanged,
+                this, &MainWindow::onLidarStatusChanged);
+        
+        connect(lidarManager, &LidarManager::lidarError,
+                this, &MainWindow::onLidarError);
+        
+        // 连接处理器信号
+        LOG_INFO("开始连接处理器信号...");
+        try {
+            // 逐一连接处理器信号，并在每个信号后添加日志
+            LOG_INFO("连接processFinished信号...");
+            QObject::connect(fastLioProcessor, SIGNAL(processFinished(pcl::PointCloud<pcl::PointXYZI>::Ptr)),
+                         this, SLOT(onProcessFinished(pcl::PointCloud<pcl::PointXYZI>::Ptr)));
+            LOG_INFO("processFinished信号连接完成");
+            
+            LOG_INFO("连接globalMapUpdated信号...");
+            QObject::connect(fastLioProcessor, SIGNAL(globalMapUpdated(pcl::PointCloud<pcl::PointXYZI>::Ptr)),
+                         this, SLOT(onGlobalMapUpdated(pcl::PointCloud<pcl::PointXYZI>::Ptr)));
+            LOG_INFO("globalMapUpdated信号连接完成");
+            
+            LOG_INFO("连接poseUpdated信号...");
+            QObject::connect(fastLioProcessor, SIGNAL(poseUpdated(const Eigen::Matrix4f&)),
+                         this, SLOT(onPoseUpdated(const Eigen::Matrix4f&)));
+            LOG_INFO("poseUpdated信号连接完成");
+            
+            LOG_INFO("连接processorError信号...");
+            QObject::connect(fastLioProcessor, SIGNAL(processorError(const QString&)),
+                         this, SLOT(onProcessorError(const QString&)));
+            LOG_INFO("processorError信号连接完成");
+        } catch (const std::exception& e) {
+            LOG_FATAL(QString("连接处理器信号时发生异常: %1").arg(e.what()));
+            QMessageBox::critical(this, "致命错误", QString("连接处理器信号时发生异常: %1").arg(e.what()));
+        } catch (...) {
+            LOG_FATAL("连接处理器信号时发生未知异常");
+            QMessageBox::critical(this, "致命错误", "连接处理器信号时发生未知异常");
+        }
+        
+        // 注意：我们在这里不连接定时器信号，而是在创建定时器后再连接
+        LOG_INFO("信号和槽连接部分完成，定时器信号将在创建定时器后连接");
+                
+    } catch (const std::exception& e) {
+        LOG_FATAL(QString("连接信号和槽时发生异常: %1").arg(e.what()));
+        QMessageBox::critical(this, "致命错误", QString("连接信号和槽时发生异常: %1").arg(e.what()));
+    } catch (...) {
+        LOG_FATAL("连接信号和槽时发生未知异常");
+        QMessageBox::critical(this, "致命错误", "连接信号和槽时发生未知异常");
+    }
 }
 
 void MainWindow::initializeSettings()
@@ -264,20 +425,138 @@ void MainWindow::initializePclVisualizer()
 
 void MainWindow::loadConfigFile()
 {
-    if (QFile::exists(configFilePath)) {
-        // 初始化激光雷达和处理器
-        if (!lidarManager->initialize(configFilePath)) {
-            statusBar()->showMessage("激光雷达初始化失败");
-            QMessageBox::critical(this, "错误", "激光雷达初始化失败，请检查配置文件");
+    LOG_INFO("开始加载配置文件: " + configFilePath);
+    
+    try {
+        LOG_INFO("检查配置文件是否存在...");
+        if (!QFile::exists(configFilePath)) {
+            LOG_ERROR("配置文件不存在: " + configFilePath);
+            statusBar()->showMessage("配置文件不存在: " + configFilePath);
+            QMessageBox::warning(this, "警告", "配置文件不存在: " + configFilePath + "\n请先配置参数。");
+            return;
+        }
+        LOG_INFO("配置文件存在");
+        
+        LOG_INFO("检查组件对象...");
+        // 确保组件对象已创建
+        if (!lidarManager) {
+            LOG_ERROR("激光雷达管理器对象未创建");
+            QMessageBox::critical(this, "错误", "激光雷达管理器对象未创建，无法初始化");
+            return;
+        }
+        LOG_INFO("激光雷达管理器对象有效");
+        
+        if (!fastLioProcessor) {
+            LOG_ERROR("Fast-LIO处理器对象未创建");
+            QMessageBox::critical(this, "错误", "Fast-LIO处理器对象未创建，无法初始化");
+            return;
+        }
+        LOG_INFO("Fast-LIO处理器对象有效");
+        
+        LOG_INFO("配置文件存在，准备初始化组件");
+        
+        // 初始化激光雷达
+        LOG_INFO("开始初始化激光雷达管理器...");
+        bool lidarInitResult = false;
+        try {
+            LOG_INFO("调用lidarManager->initialize...");
+            lidarInitResult = lidarManager->initialize(configFilePath);
+            LOG_INFO("lidarManager->initialize调用完成，结果: " + (lidarInitResult ? QString("成功") : QString("失败")));
+        } catch (const std::exception& e) {
+            LOG_ERROR(QString("激光雷达初始化异常: %1").arg(e.what()));
+            QMessageBox::critical(this, "错误", QString("激光雷达初始化异常: %1").arg(e.what()));
+            return;
         }
         
-        if (!fastLioProcessor->initialize(configFilePath)) {
+        if (!lidarInitResult) {
+            LOG_ERROR("激光雷达初始化失败");
+            statusBar()->showMessage("激光雷达初始化失败");
+            QMessageBox::critical(this, "错误", "激光雷达初始化失败，请检查配置文件和设备连接");
+            return;
+        }
+        LOG_INFO("激光雷达管理器初始化成功");
+        
+        // 检查是否需要启用IMU
+        LOG_INFO("开始检查IMU配置...");
+        try {
+            LOG_INFO("打开配置文件读取IMU设置...");
+            QFile file(configFilePath);
+            if (file.open(QIODevice::ReadOnly)) {
+                LOG_INFO("配置文件打开成功");
+                QByteArray fileData = file.readAll();
+                file.close();
+                LOG_INFO("配置文件读取完成");
+                
+                LOG_INFO("解析JSON数据...");
+                QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
+                LOG_INFO("JSON数据解析完成");
+                
+                if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                    LOG_INFO("检查FastLio节点...");
+                    QJsonObject rootObj = jsonDoc.object();
+                    
+                    if (rootObj.contains("FastLio") && rootObj["FastLio"].isObject()) {
+                        LOG_INFO("找到FastLio节点，检查use_imu_data设置...");
+                        QJsonObject fastLioObj = rootObj["FastLio"].toObject();
+                        if (fastLioObj.contains("use_imu_data")) {
+                            bool useImu = fastLioObj["use_imu_data"].toBool();
+                            LOG_INFO(QString("IMU配置: %1").arg(useImu ? "启用" : "禁用"));
+                            
+                            LOG_INFO("设置IMU状态...");
+                            if (useImu) {
+                                LOG_INFO("正在启用IMU...");
+                                lidarManager->enableImu(true);
+                                LOG_INFO("IMU已启用");
+                            } else {
+                                LOG_INFO("IMU配置为禁用，不执行操作");
+                            }
+                        } else {
+                            LOG_INFO("未找到use_imu_data设置，使用默认配置");
+                        }
+                    } else {
+                        LOG_INFO("未找到FastLio节点，使用默认配置");
+                    }
+                } else {
+                    LOG_ERROR("JSON数据无效或为空");
+                }
+            } else {
+                LOG_ERROR("无法打开配置文件读取IMU设置: " + file.errorString());
+            }
+        } catch (const std::exception& e) {
+            LOG_ERROR(QString("读取IMU配置时异常: %1").arg(e.what()));
+        }
+        LOG_INFO("IMU配置检查完成");
+        
+        // 初始化Fast-LIO处理器
+        LOG_INFO("开始初始化Fast-LIO处理器...");
+        bool processorInitResult = false;
+        try {
+            LOG_INFO("调用fastLioProcessor->initialize...");
+            processorInitResult = fastLioProcessor->initialize(configFilePath);
+            LOG_INFO("fastLioProcessor->initialize调用完成，结果: " + (processorInitResult ? QString("成功") : QString("失败")));
+        } catch (const std::exception& e) {
+            LOG_ERROR(QString("Fast-LIO初始化异常: %1").arg(e.what()));
+            QMessageBox::critical(this, "错误", QString("Fast-LIO初始化异常: %1").arg(e.what()));
+            return;
+        }
+        
+        if (!processorInitResult) {
+            LOG_ERROR("Fast-LIO初始化失败");
             statusBar()->showMessage("Fast-LIO初始化失败");
             QMessageBox::critical(this, "错误", "Fast-LIO初始化失败，请检查配置文件");
+            return;
         }
-    } else {
-        statusBar()->showMessage("配置文件不存在: " + configFilePath);
-        QMessageBox::warning(this, "警告", "配置文件不存在: " + configFilePath + "\n请先配置参数。");
+        LOG_INFO("Fast-LIO处理器初始化成功");
+        
+        LOG_INFO("配置文件加载和组件初始化完成");
+    } catch (const std::exception& e) {
+        LOG_ERROR(QString("加载配置文件时发生异常: %1").arg(e.what()));
+        statusBar()->showMessage("配置加载异常");
+        QMessageBox::critical(this, "错误", QString("加载配置文件时发生异常: %1").arg(e.what()));
+    } catch (...) {
+        LOG_ERROR("加载配置文件时发生未知异常");
+        statusBar()->showMessage("配置加载异常");
+        QMessageBox::critical(this, "错误", "加载配置文件时发生未知异常");
     }
 }
 
@@ -372,40 +651,125 @@ void MainWindow::onClearMap()
 
 void MainWindow::onUpdatePointCloud()
 {
-    if (!visualizer) {
-        return;
-    }
-    
-    QMutexLocker locker(&cloudMutex);
-    
-    // 更新当前点云
-    if (currentCloud && !currentCloud->empty()) {
-        // 使用高度(z)作为颜色映射
-        pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> color_handler(currentCloud, "z");
-        if (!visualizer->updatePointCloud(currentCloud, color_handler, "current_cloud")) {
-            visualizer->addPointCloud(currentCloud, color_handler, "current_cloud");
+    try {
+        LOG_INFO("开始更新点云显示...");
+        
+        // 首次运行标记，用于延迟初始化
+        static bool firstRun = true;
+        // 全局地图更新计数器，减少更新频率
+        static int globalMapUpdateCounter = 0;
+        
+        if (firstRun) {
+            // 首次运行时只进行基本检查，不执行复杂操作
+            LOG_INFO("首次执行onUpdatePointCloud，只进行基本检查");
+            
+            if (!visualizer) {
+                LOG_ERROR("可视化器对象为空，跳过点云更新");
+                return;
+            }
+            
+            // 确认窗口组件正常
+            if (!qvtkWidget || !qvtkWidget->isValid()) {
+                LOG_ERROR("QVTK部件无效，跳过点云更新");
+                return;
+            }
+            
+            firstRun = false;
+            LOG_INFO("首次执行onUpdatePointCloud检查通过");
+            
+            // 首次运行只做简单更新，不处理点云
+            qvtkWidget->update();
+            return;
         }
-        visualizer->setPointCloudRenderingProperties(
-            pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "current_cloud");
-    }
-    
-    // 更新全局地图
-    if (globalMap && !globalMap->empty()) {
-        // 使用高度(z)作为颜色映射
-        pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> color_handler(globalMap, "z");
-        if (!visualizer->updatePointCloud(globalMap, color_handler, "global_map")) {
-            visualizer->addPointCloud(globalMap, color_handler, "global_map");
+        
+        // 记录刷新帧率
+        adaptiveTimerCounter++;
+        
+        // 非首次运行，执行完整的点云更新流程
+        if (!visualizer) {
+            LOG_ERROR("可视化器对象为空，无法更新点云");
+            return;
         }
-        visualizer->setPointCloudRenderingProperties(
-            pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "global_map");
+        
+        // 使用锁保护访问点云数据
+        QMutexLocker locker(&cloudMutex);
+        LOG_INFO("获取点云互斥锁成功");
+        
+        // 更新当前点云 - 每次都更新
+        if (currentCloud && !currentCloud->empty()) {
+            try {
+                // 使用强度作为颜色映射，增强障碍物可见性
+                pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> color_handler(currentCloud, "intensity");
+                
+                if (!visualizer->updatePointCloud(currentCloud, color_handler, "current_cloud")) {
+                    visualizer->addPointCloud(currentCloud, color_handler, "current_cloud");
+                }
+                // 增大点云尺寸，便于观察
+                visualizer->setPointCloudRenderingProperties(
+                    pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "current_cloud");
+                    
+                // 确保当前帧点云显示在全局地图之上
+                visualizer->setPointCloudRenderingProperties(
+                    pcl::visualization::PCL_VISUALIZER_OPACITY, 1.0, "current_cloud");
+                
+                // 若存在全局地图，将其透明度降低，防止遮挡当前帧
+                if (globalMap && !globalMap->empty()) {
+                    visualizer->setPointCloudRenderingProperties(
+                        pcl::visualization::PCL_VISUALIZER_OPACITY, 0.7, "global_map");
+                }
+            } catch (const std::exception& e) {
+                LOG_ERROR(QString("更新当前点云异常: %1").arg(e.what()));
+            }
+        } else {
+            LOG_INFO("当前点云为空或不存在，跳过更新");
+        }
+        
+        // 更新全局地图 - 减少更新频率
+        globalMapUpdateCounter++;
+        if (globalMapUpdateCounter >= 5) { // 每5帧更新一次全局地图
+            globalMapUpdateCounter = 0;
+            
+            LOG_INFO("开始更新全局地图...");
+            if (globalMap && !globalMap->empty()) {
+                try {
+                    LOG_INFO("创建全局地图颜色处理器...");
+                    // 使用高度(z)作为颜色映射
+                    pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> color_handler(globalMap, "z");
+                    LOG_INFO("全局地图颜色处理器创建成功");
+                    
+                    LOG_INFO("更新/添加全局地图到可视化器...");
+                    if (!visualizer->updatePointCloud(globalMap, color_handler, "global_map")) {
+                        LOG_INFO("全局地图首次添加");
+                        visualizer->addPointCloud(globalMap, color_handler, "global_map");
+                    }
+                    LOG_INFO("设置全局地图渲染属性...");
+                    visualizer->setPointCloudRenderingProperties(
+                        pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "global_map");
+                    LOG_INFO("全局地图渲染属性设置完成");
+                } catch (const std::exception& e) {
+                    LOG_ERROR(QString("更新全局地图异常: %1").arg(e.what()));
+                }
+            } else {
+                LOG_INFO("全局地图为空或不存在，跳过更新");
+            }
+        }
+        
+        // 更新显示
+        LOG_INFO("更新VTK部件...");
+        qvtkWidget->update();
+        LOG_INFO("VTK部件更新完成");
+        
+        // 添加调试输出 - 减少日志频率
+        if (adaptiveTimerCounter % 30 == 0) {
+            LOG_INFO(QString("点云更新完成 - 当前点云点数: %1, 全局地图点数: %2")
+                    .arg(currentCloud ? currentCloud->size() : 0)
+                    .arg(globalMap ? globalMap->size() : 0));
+        }
+    } catch (const std::exception& e) {
+        LOG_ERROR(QString("更新点云过程中发生异常: %1").arg(e.what()));
+    } catch (...) {
+        LOG_ERROR("更新点云过程中发生未知异常");
     }
-    
-    // 更新显示
-    qvtkWidget->update();
-    
-    // 添加调试输出
-    qDebug() << "更新点云显示 - 当前点云点数:" << (currentCloud ? currentCloud->size() : 0)
-             << "全局地图点数:" << (globalMap ? globalMap->size() : 0);
 }
 
 void MainWindow::onConfigSettings()
@@ -455,6 +819,73 @@ void MainWindow::onGlobalMapUpdated(pcl::PointCloud<pcl::PointXYZI>::Ptr newGlob
 
 void MainWindow::onPoseUpdated(const Eigen::Matrix4f& pose)
 {
+    // 记录轨迹点 - 用于可视化
+    static pcl::PointCloud<pcl::PointXYZ>::Ptr trajectoryCloud(new pcl::PointCloud<pcl::PointXYZ>());
+    static int trajectorySkipCount = 0;
+    
+    // 每5个位姿更新才添加一个轨迹点，避免过密
+    trajectorySkipCount++;
+    if (trajectorySkipCount >= 5) {
+        trajectorySkipCount = 0;
+        
+        // 添加当前位置到轨迹
+        pcl::PointXYZ trajectoryPoint;
+        trajectoryPoint.x = pose(0, 3);
+        trajectoryPoint.y = pose(1, 3);
+        trajectoryPoint.z = pose(2, 3);
+        trajectoryCloud->push_back(trajectoryPoint);
+        
+        // 限制轨迹点数量
+        const size_t MAX_TRAJECTORY_POINTS = 1000;
+        if (trajectoryCloud->size() > MAX_TRAJECTORY_POINTS) {
+            trajectoryCloud->erase(trajectoryCloud->begin(), 
+                                  trajectoryCloud->begin() + (trajectoryCloud->size() - MAX_TRAJECTORY_POINTS));
+        }
+        
+        // 更新轨迹可视化 - 修复：使用逐段线条替代不存在的addPolyline方法
+        if (visualizer) {
+            // 移除旧的轨迹线段
+            visualizer->removeAllShapes();
+            
+            // 如果轨迹中有至少两个点，开始绘制线段
+            if (trajectoryCloud->size() >= 2) {
+                for (size_t i = 1; i < trajectoryCloud->size(); ++i) {
+                    // 每段线条使用唯一ID
+                    std::string line_id = "trajectory_line_" + std::to_string(i-1);
+                    
+                    // 添加线段连接相邻两点
+                    visualizer->addLine(
+                        trajectoryCloud->points[i-1], 
+                        trajectoryCloud->points[i], 
+                        0, 0, 255,  // 蓝色 RGB
+                        line_id);
+                    
+                    // 设置线条宽度
+                    visualizer->setShapeRenderingProperties(
+                        pcl::visualization::PCL_VISUALIZER_LINE_WIDTH, 
+                        2, line_id);
+                }
+            }
+        }
+    }
+    
+    // 可视化当前位姿 - 坐标系
+    if (visualizer) {
+        // 提取旋转矩阵和平移向量
+        Eigen::Matrix3f rotation = pose.block<3, 3>(0, 0);
+        Eigen::Vector3f position(pose(0, 3), pose(1, 3), pose(2, 3));
+        
+        // 移除旧的坐标系
+        visualizer->removeCoordinateSystem("current_pose");
+        
+        // 添加新的坐标系表示当前位姿
+        Eigen::Affine3f poseAffine;
+        poseAffine.linear() = rotation;
+        poseAffine.translation() = position;
+        visualizer->addCoordinateSystem(0.5, poseAffine, "current_pose");
+    }
+    
+    // 自动相机跟随功能
     if (visualizer && autoFollowCamera) {
         static int update_count = 0;
         if (update_count++ % 10 == 0) {
@@ -476,4 +907,11 @@ void MainWindow::onPoseUpdated(const Eigen::Matrix4f& pose)
 void MainWindow::onProcessorError(const QString &errorMessage) {
     statusBar()->showMessage("处理错误: " + errorMessage);
     QMessageBox::critical(this, "处理错误", errorMessage);
+}
+
+// 添加新的槽函数用于处理可视化点云
+void MainWindow::onPointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr cloud)
+{
+    // 更新当前点云用于可视化
+    currentCloud = cloud;
 } 

@@ -42,6 +42,12 @@ static constexpr auto qt_meta_stringdata_ZN12LidarManagerE = QtMocHelpers::strin
     "",
     "pcl::PointCloud<pcl::PointXYZI>::Ptr",
     "cloud",
+    "pointCloudWithTimestamp",
+    "uint64_t",
+    "timestamp",
+    "imuDataReceived",
+    "ImuData",
+    "imuData",
     "lidarStatusChanged",
     "connected",
     "lidarError",
@@ -58,25 +64,29 @@ Q_CONSTINIT static const uint qt_meta_data_ZN12LidarManagerE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   38,    2, 0x06,    1 /* Public */,
-       5,    1,   41,    2, 0x06,    3 /* Public */,
-       7,    1,   44,    2, 0x06,    5 /* Public */,
+       1,    1,   50,    2, 0x06,    1 /* Public */,
+       5,    2,   53,    2, 0x06,    3 /* Public */,
+       8,    1,   58,    2, 0x06,    6 /* Public */,
+      11,    1,   61,    2, 0x06,    8 /* Public */,
+      13,    1,   64,    2, 0x06,   10 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       9,    0,   47,    2, 0x08,    7 /* Private */,
+      15,    0,   67,    2, 0x08,   12 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, QMetaType::Bool,    6,
-    QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 6,    4,    7,
+    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, QMetaType::Bool,   12,
+    QMetaType::Void, QMetaType::QString,   14,
 
  // slots: parameters
     QMetaType::Void,
@@ -96,6 +106,13 @@ Q_CONSTINIT const QMetaObject LidarManager::staticMetaObject = { {
         // method 'pointCloudReceived'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>,
+        // method 'pointCloudWithTimestamp'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>,
+        QtPrivate::TypeAndForceComplete<uint64_t, std::false_type>,
+        // method 'imuDataReceived'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const ImuData &, std::false_type>,
         // method 'lidarStatusChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
@@ -114,9 +131,11 @@ void LidarManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->pointCloudReceived((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1]))); break;
-        case 1: _t->lidarStatusChanged((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 2: _t->lidarError((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 3: _t->processPointCloud(); break;
+        case 1: _t->pointCloudWithTimestamp((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<uint64_t>>(_a[2]))); break;
+        case 2: _t->imuDataReceived((*reinterpret_cast< std::add_pointer_t<ImuData>>(_a[1]))); break;
+        case 3: _t->lidarStatusChanged((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 4: _t->lidarError((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->processPointCloud(); break;
         default: ;
         }
     }
@@ -130,16 +149,30 @@ void LidarManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             }
         }
         {
+            using _q_method_type = void (LidarManager::*)(pcl::PointCloud<pcl::PointXYZI>::Ptr , uint64_t );
+            if (_q_method_type _q_method = &LidarManager::pointCloudWithTimestamp; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 1;
+                return;
+            }
+        }
+        {
+            using _q_method_type = void (LidarManager::*)(const ImuData & );
+            if (_q_method_type _q_method = &LidarManager::imuDataReceived; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+                *result = 2;
+                return;
+            }
+        }
+        {
             using _q_method_type = void (LidarManager::*)(bool );
             if (_q_method_type _q_method = &LidarManager::lidarStatusChanged; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
-                *result = 1;
+                *result = 3;
                 return;
             }
         }
         {
             using _q_method_type = void (LidarManager::*)(const QString & );
             if (_q_method_type _q_method = &LidarManager::lidarError; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
-                *result = 2;
+                *result = 4;
                 return;
             }
         }
@@ -165,14 +198,14 @@ int LidarManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }
@@ -185,16 +218,30 @@ void LidarManager::pointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr _t1)
 }
 
 // SIGNAL 1
-void LidarManager::lidarStatusChanged(bool _t1)
+void LidarManager::pointCloudWithTimestamp(pcl::PointCloud<pcl::PointXYZI>::Ptr _t1, uint64_t _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void LidarManager::lidarError(const QString & _t1)
+void LidarManager::imuDataReceived(const ImuData & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void LidarManager::lidarStatusChanged(bool _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void LidarManager::lidarError(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_WARNING_POP

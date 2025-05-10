@@ -49,6 +49,7 @@ private slots:
     void onGlobalMapUpdated(pcl::PointCloud<pcl::PointXYZI>::Ptr newGlobalMap);
     void onPoseUpdated(const Eigen::Matrix4f &pose);
     void onProcessorError(const QString &errorMessage);
+    void onPointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr cloud);  // 新增槽函数声明
 
 private:
     void setupUI();
@@ -64,6 +65,7 @@ private:
     pcl::visualization::PCLVisualizer::Ptr visualizer;
     QVTKOpenGLNativeWidget *qvtkWidget;
     QTimer *visualizerTimer;
+    int adaptiveTimerCounter; // 用于自适应性能调整的计数器
     
     // 线程与互斥锁
     QThread lidarThread;

@@ -116,26 +116,40 @@ int main(int argc, char *argv[])
             QMessageBox::critical(nullptr, "错误", "配置文件不存在: " + configPath);
             return 1;
         }
+        LOG_INFO("配置文件检查通过: " + configPath);
         
-        // 创建主窗口
-        MainWindow mainWindow;
-        mainWindow.show();
-        
-        // 连接日志信号到状态栏
-        QObject::connect(&Logger::getInstance(), &Logger::logMessage,
-            [&mainWindow](int level, const QString& message) {
-                if (level >= Logger::Warning) {
-                    mainWindow.statusBar()->showMessage(message, 5000);
-                }
-            });
-        
-        LOG_INFO("主窗口已显示");
-        
-        // 运行应用程序
-        int result = app.exec();
-        
-        LOG_INFO("应用程序退出，返回值: " + QString::number(result));
-        return result;
+        LOG_INFO("正在创建主窗口...");
+        try {
+            // 创建主窗口
+            MainWindow mainWindow;
+            LOG_INFO("主窗口创建成功，即将显示");
+            mainWindow.show();
+            
+            // 连接日志信号到状态栏
+            QObject::connect(&Logger::getInstance(), &Logger::logMessage,
+                [&mainWindow](int level, const QString& message) {
+                    if (level >= Logger::Warning) {
+                        mainWindow.statusBar()->showMessage(message, 5000);
+                    }
+                });
+            
+            LOG_INFO("主窗口已显示");
+            
+            // 运行应用程序
+            int result = app.exec();
+            
+            LOG_INFO("应用程序退出，返回值: " + QString::number(result));
+            return result;
+        } catch (const std::exception& e) {
+            LOG_FATAL(QString("创建主窗口过程中发生异常: %1").arg(e.what()));
+            QMessageBox::critical(nullptr, "致命错误", 
+                QString("创建主窗口过程中发生异常:\n%1").arg(e.what()));
+            return 1;
+        } catch (...) {
+            LOG_FATAL("创建主窗口过程中发生未知异常");
+            QMessageBox::critical(nullptr, "致命错误", "创建主窗口过程中发生未知异常");
+            return 1;
+        }
         
     } catch (const std::exception& e) {
         LOG_FATAL(QString("未捕获的异常: %1").arg(e.what()));

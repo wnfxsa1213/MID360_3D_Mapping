@@ -1099,11 +1099,11 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "MID360_3D_Mapping_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "MID360_3D_Mapping_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "MID360_3D_Mapping_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "MID360_3D_Mapping::@6890427a1f51a3e7e1df",

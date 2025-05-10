@@ -59,7 +59,9 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "onPoseUpdated",
     "Eigen::Matrix4f",
     "pose",
-    "onProcessorError"
+    "onProcessorError",
+    "onPointCloudReceived",
+    "cloud"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -71,7 +73,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -79,19 +81,20 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   92,    2, 0x08,    1 /* Private */,
-       3,    0,   93,    2, 0x08,    2 /* Private */,
-       4,    0,   94,    2, 0x08,    3 /* Private */,
-       5,    0,   95,    2, 0x08,    4 /* Private */,
-       6,    0,   96,    2, 0x08,    5 /* Private */,
-       7,    0,   97,    2, 0x08,    6 /* Private */,
-       8,    0,   98,    2, 0x08,    7 /* Private */,
-       9,    1,   99,    2, 0x08,    8 /* Private */,
-      11,    1,  102,    2, 0x08,   10 /* Private */,
-      13,    1,  105,    2, 0x08,   12 /* Private */,
-      16,    1,  108,    2, 0x08,   14 /* Private */,
-      18,    1,  111,    2, 0x08,   16 /* Private */,
-      21,    1,  114,    2, 0x08,   18 /* Private */,
+       1,    0,   98,    2, 0x08,    1 /* Private */,
+       3,    0,   99,    2, 0x08,    2 /* Private */,
+       4,    0,  100,    2, 0x08,    3 /* Private */,
+       5,    0,  101,    2, 0x08,    4 /* Private */,
+       6,    0,  102,    2, 0x08,    5 /* Private */,
+       7,    0,  103,    2, 0x08,    6 /* Private */,
+       8,    0,  104,    2, 0x08,    7 /* Private */,
+       9,    1,  105,    2, 0x08,    8 /* Private */,
+      11,    1,  108,    2, 0x08,   10 /* Private */,
+      13,    1,  111,    2, 0x08,   12 /* Private */,
+      16,    1,  114,    2, 0x08,   14 /* Private */,
+      18,    1,  117,    2, 0x08,   16 /* Private */,
+      21,    1,  120,    2, 0x08,   18 /* Private */,
+      22,    1,  123,    2, 0x08,   20 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -107,6 +110,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
     QMetaType::Void, 0x80000000 | 14,   17,
     QMetaType::Void, 0x80000000 | 19,   20,
     QMetaType::Void, QMetaType::QString,   12,
+    QMetaType::Void, 0x80000000 | 14,   23,
 
        0        // eod
 };
@@ -151,7 +155,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const Eigen::Matrix4f &, std::false_type>,
         // method 'onProcessorError'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'onPointCloudReceived'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<pcl::PointCloud<pcl::PointXYZI>::Ptr, std::false_type>
     >,
     nullptr
 } };
@@ -174,6 +181,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->onGlobalMapUpdated((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1]))); break;
         case 11: _t->onPoseUpdated((*reinterpret_cast< std::add_pointer_t<Eigen::Matrix4f>>(_a[1]))); break;
         case 12: _t->onProcessorError((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 13: _t->onPointCloudReceived((*reinterpret_cast< std::add_pointer_t<pcl::PointCloud<pcl::PointXYZI>::Ptr>>(_a[1]))); break;
         default: ;
         }
     }
@@ -198,14 +206,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }
