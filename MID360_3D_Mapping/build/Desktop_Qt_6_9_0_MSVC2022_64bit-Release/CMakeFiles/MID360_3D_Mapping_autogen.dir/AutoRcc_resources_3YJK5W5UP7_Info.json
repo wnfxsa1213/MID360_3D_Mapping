@@ -1,0 +1,30 @@
+{
+	"BUILD_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/MID360_3D_Mapping_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping",
+	"CMAKE_SOURCE_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/MID360_3D_Mapping_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/start.png",
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/stop.png",
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/clear.png",
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/save.png",
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/config.png",
+		"C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/icons/load.png"
+	],
+	"LOCK_FILE" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/MID360_3D_Mapping_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "D:/vcpkg/installed/x64-windows/tools/Qt6/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/MID360_3D_Mapping_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "C:/Users/13027/Desktop/360/MID360_3D_Mapping/resources/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

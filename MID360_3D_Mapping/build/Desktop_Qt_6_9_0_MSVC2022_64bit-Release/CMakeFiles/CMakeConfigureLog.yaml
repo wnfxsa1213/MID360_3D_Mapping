@@ -1,0 +1,396 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/HostX64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.43.34810 版
+      版权所有(C) Microsoft Corporation。保留所有权利。
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.43.34810.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/4.0.2/CompilerIdCXX/CMakeCXXCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:1322 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        注意: 包含文件:  C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "注意: 包含文件:  "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-8wmx3b"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-8wmx3b"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-8wmx3b'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_d4b3a
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_d4b3a.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_d4b3a.dir\\ /FS -c "C:\\Program Files\\CMake\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_d4b3a.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_d4b3a.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_d4b3a.exe /implib:cmTC_d4b3a.lib /pdb:cmTC_d4b3a.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:227 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/PROGRA~1/MIB055~1/2022/COMMUN~1/VC/Tools/MSVC/1443~1.348/bin/Hostx64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeDetermineCompilerABI.cmake:270 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:8 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/PROGRA~1/MIB055~1/2022/COMMUN~1/VC/Tools/MSVC/1443~1.348/bin/Hostx64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.43.34810.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:99 (check_cxx_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Config.cmake:146 (include)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:43 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-bxb8mp"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-bxb8mp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-bxb8mp'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_2a208
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_2a208.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_2a208.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-bxb8mp\\src.cxx
+        \x1b[31mFAILED: \x1b[0mCMakeFiles/cmTC_2a208.dir/src.cxx.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_2a208.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_2a208.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-bxb8mp\\src.cxx
+        C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-bxb8mp\\src.cxx(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Config.cmake:146 (include)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:43 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nwfgoj"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nwfgoj"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-nwfgoj'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_2b010
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_2b010.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_2b010.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-nwfgoj\\CheckFunctionExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_2b010.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b010.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_2b010.exe /implib:cmTC_2b010.lib /pdb:cmTC_2b010.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        \x1b[31mFAILED: \x1b[0mcmTC_2b010.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_2b010.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b010.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_2b010.exe /implib:cmTC_2b010.lib /pdb:cmTC_2b010.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b010.dir\\CheckFunctionExists.cxx.obj /out:cmTC_2b010.exe /implib:cmTC_2b010.lib /pdb:cmTC_2b010.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_2b010.dir/intermediate.manifest CMakeFiles\\cmTC_2b010.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: 无法打开文件“pthreads.lib”\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckLibraryExists.cmake:112 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:112 (check_library_exists)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Dependencies.cmake:34 (_qt_internal_find_third_party_dependencies)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Config.cmake:146 (include)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:43 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-qp5i2p"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-qp5i2p"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-qp5i2p'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_ff9ba
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -DCHECK_FUNCTION_EXISTS=pthread_create /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_ff9ba.dir\\CheckFunctionExists.cxx.obj /FdCMakeFiles\\cmTC_ff9ba.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-qp5i2p\\CheckFunctionExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_ff9ba.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ff9ba.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_ff9ba.exe /implib:cmTC_ff9ba.lib /pdb:cmTC_ff9ba.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        \x1b[31mFAILED: \x1b[0mcmTC_ff9ba.exe 
+        C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_ff9ba.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ff9ba.dir\\CheckFunctionExists.cxx.obj  /out:cmTC_ff9ba.exe /implib:cmTC_ff9ba.lib /pdb:cmTC_ff9ba.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ff9ba.dir\\CheckFunctionExists.cxx.obj /out:cmTC_ff9ba.exe /implib:cmTC_ff9ba.lib /pdb:cmTC_ff9ba.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_ff9ba.dir/intermediate.manifest CMakeFiles\\cmTC_ff9ba.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: 无法打开文件“pthread.lib”\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6Core/Qt6CoreDependencies.cmake:35 (_qt_internal_find_third_party_dependencies)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6Core/Qt6CoreConfig.cmake:45 (include)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/Qt6/Qt6Config.cmake:196 (find_package)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:43 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-luh5uy"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-luh5uy"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-luh5uy'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_cd272
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -DHAVE_STDATOMIC  /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_cd272.dir\\src.cxx.obj /FdCMakeFiles\\cmTC_cd272.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-luh5uy\\src.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_cd272.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_cd272.dir\\src.cxx.obj  /out:cmTC_cd272.exe /implib:cmTC_cd272.lib /pdb:cmTC_cd272.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckSymbolExists.cmake:160 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CheckSymbolExists.cmake:69 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindBZip2.cmake:100 (check_symbol_exists)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/CMakeFindDependencyMacro.cmake:78 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/boost_iostreams/boost_iostreams-config.cmake:61 (find_dependency)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/boost/BoostConfig.cmake:67 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/boost/BoostConfig.cmake:128 (boostcfg_find_component)"
+      - "D:/vcpkg/installed/x64-windows/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:847 (include)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:110 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:283 (find_boost)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:563 (find_external_library)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:62 (find_package)"
+    checks:
+      - "Looking for BZ2_bzCompressInit"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-pjgv0x"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-pjgv0x"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin;D:/vcpkg/installed/x64-windows/share/pcl/Modules"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "BZIP2_NEED_PREFIX"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-pjgv0x'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_bf2d8
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP  -ID:\\vcpkg\\installed\\x64-windows\\include /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_bf2d8.dir\\CheckSymbolExists.cxx.obj /FdCMakeFiles\\cmTC_bf2d8.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-pjgv0x\\CheckSymbolExists.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_bf2d8.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_bf2d8.dir\\CheckSymbolExists.cxx.obj  /out:cmTC_bf2d8.exe /implib:cmTC_bf2d8.lib /pdb:cmTC_bf2d8.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  D:\\vcpkg\\installed\\x64-windows\\lib\\bz2.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:250 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:557 (_OPENMP_GET_FLAGS)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:317 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:560 (find_external_library)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:62 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-rra7jw"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-rra7jw"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin;D:/vcpkg/installed/x64-windows/share/pcl/Modules"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_openmp"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-rra7jw'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_82652
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_82652.dir\\OpenMPTryFlag.cpp.obj /FdCMakeFiles\\cmTC_82652.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-rra7jw\\OpenMPTryFlag.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_82652.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_82652.dir\\OpenMPTryFlag.cpp.obj  /out:cmTC_82652.exe /implib:cmTC_82652.lib /pdb:cmTC_82652.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:491 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.0/Modules/FindOpenMP.cmake:631 (_OPENMP_GET_SPEC_DATE)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:317 (find_package)"
+      - "D:/vcpkg/installed/x64-windows/share/pcl/PCLConfig.cmake:560 (find_external_library)"
+      - "D:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (_find_package)"
+      - "CMakeLists.txt:62 (find_package)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-quxjie"
+      binary: "C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-quxjie"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "D:/vcpkg/installed/x64-windows/share/Qt6;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/extra-cmake-modules/find-modules;D:/vcpkg/installed/x64-windows/share/Qt6/3rdparty/kwin;D:/vcpkg/installed/x64-windows/share/pcl/Modules"
+      VCPKG_INSTALLED_DIR: "D:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "D:/vcpkg"
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/13027/Desktop/360/MID360_3D_Mapping/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Release/CMakeFiles/CMakeScratch/TryCompile-quxjie'
+        
+        Run Build Command(s): C:/PROGRA~1/MIB055~1/2022/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v cmTC_da040
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\HostX64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc -openmp /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /showIncludes /FoCMakeFiles\\cmTC_da040.dir\\OpenMPCheckVersion.cpp.obj /FdCMakeFiles\\cmTC_da040.dir\\ /FS -c C:\\Users\\13027\\Desktop\\360\\MID360_3D_Mapping\\build\\Desktop_Qt_6_9_0_MSVC2022_64bit-Release\\CMakeFiles\\CMakeScratch\\TryCompile-quxjie\\OpenMPCheckVersion.cpp
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1943 --intdir=CMakeFiles\\cmTC_da040.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_da040.dir\\OpenMPCheckVersion.cpp.obj  /out:cmTC_da040.exe /implib:cmTC_da040.lib /pdb:cmTC_da040.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+...

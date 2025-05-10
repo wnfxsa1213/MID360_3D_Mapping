@@ -1,0 +1,65 @@
+{
+  "master_sdk" : true,
+  "lidar_log_enable": true,
+  "lidar_log_cache_size_MB": 500,
+  "lidar_log_path": "./logs/",
+
+  "MID360": {
+    "lidar_net_info": {
+      "cmd_data_port": 56100,
+      "push_msg_port": 56200,
+      "point_data_port": 56300,
+      "imu_data_port": 56400,
+      "log_data_port": 56500
+    },
+    "host_net_info": [
+      {
+        "lidar_ip": ["192.168.1.3"],
+        "host_ip": "192.168.1.50",
+        "cmd_data_port": 56101,
+        "push_msg_port": 56201,
+        "point_data_port": 56301,
+        "imu_data_port": 56401,
+        "log_data_port": 56501
+      }
+    ]
+  },
+  
+  "LivoxLidar": {
+    "broadcast_code": "0TFDG3B006H4Z11",
+    "enable_fan": true,
+    "return_mode": 0,
+    "coordinate": 0,
+    "imu_rate": 1,
+    "extrinsic_parameter_source": 0
+  },
+  
+  "FastLio": {
+    "map_resolution": 0.2,
+    "use_imu_data": true,
+    "thread_num": 4,
+    "max_iteration": 2,
+    "filter_size_surf": 0.5,
+    "filter_size_map": 0.5,
+    "cube_len": 1000.0,
+    "det_range": 100.0,
+    "imu_en": true,
+    "imu_gravity": 9.81,
+    "imu_vel_cov": 0.1,
+    "imu_ang_cov": 0.1,
+    "imu_acc_cov": 0.1,
+    "imu_gyr_cov": 0.1,
+    "imu_bias_cov": 0.0001,
+    "imu_gravity_cov": 0.001
+  },
+  
+  "Visualization": {
+    "point_size": 1,
+    "background_color": [0.1, 0.1, 0.1],
+    "current_cloud_color": [1.0, 0.0, 0.0],
+    "global_map_color": [0.0, 1.0, 0.0],
+    "update_rate": 30,
+    "show_coordinate": true,
+    "coordinate_size": 1.0
+  }
+} 
