@@ -5,6 +5,8 @@
 #include <QJsonArray>
 #include <QDateTime>
 #include <vector>
+#include <chrono>
+#include <cstddef> // for offsetof
 
 static std::vector<LivoxLidarCartesianHighRawPoint> frame_buffer;
 static uint8_t last_frame_cnt = 0;
@@ -14,13 +16,22 @@ static size_t total_packets_count = 0; // 计数收到的数据包数量
 static uint64_t last_publish_time = 0; // 上次发布点云的时间
 
 LidarManager::LidarManager(QObject *parent)
-    : QObject(parent), connected(false), scanning(false), imuEnabled(false)
+    : QObject(parent)
+    , connected(false)
+    , scanning(false)
+    , imuEnabled(false)
+    , latestCloud(new pcl::PointCloud<pcl::PointXYZI>)
 {
-    // 初始化点云指针
-    latestCloud.reset(new pcl::PointCloud<pcl::PointXYZI>());
+    // 创建点云缓存
+    point_cloud_buffer_ = std::make_unique<PointCloudBuffer>(this);
     
-    // 初始化IMU数据
-    latestImuData = {};
+    // 连接信号槽
+    connect(point_cloud_buffer_.get(), &PointCloudBuffer::bufferSizeChanged,
+            this, &LidarManager::onBufferSizeChanged);
+    connect(point_cloud_buffer_.get(), &PointCloudBuffer::compressionCompleted,
+            this, &LidarManager::onCompressionCompleted);
+    connect(point_cloud_buffer_.get(), &PointCloudBuffer::flushCompleted,
+            this, &LidarManager::onFlushCompleted);
 }
 
 LidarManager::~LidarManager()
@@ -38,190 +49,67 @@ LidarManager::~LidarManager()
 
 bool LidarManager::initialize(const QString &configFilePath)
 {
+    QMutexLocker locker(&mutex);
+    
     configFile = configFilePath;
     
-    // 检查配置文件是否存在
-    QFile file(configFilePath);
-    if (!file.exists()) {
-        emit lidarError("配置文件不存在: " + configFilePath);
+    // 初始化点云缓存配置
+    PointCloudBuffer::BufferConfig buffer_config;
+    buffer_config.max_size = 1000;        // 最大缓存1000帧
+    buffer_config.flush_interval = 100;   // 每100ms刷新一次
+    buffer_config.enable_compression = true;
+    buffer_config.time_window = 0.1f;     // 100ms时间窗口
+    buffer_config.voxel_size = 0.01f;     // 1cm体素大小
+    
+    if (!point_cloud_buffer_->initialize(buffer_config)) {
+        emit lidarError("Failed to initialize point cloud buffer");
         return false;
     }
     
-    // 初始化Livox SDK - 修正函数调用，传递正确的参数
+    // 初始化SDK
     if (!LivoxLidarSdkInit(configFilePath.toStdString().c_str())) {
-        emit lidarError("Livox SDK初始化失败");
+        emit lidarError("Failed to initialize Livox SDK");
         return false;
     }
     
-    // 启动SDK
-    if (!LivoxLidarSdkStart()) {
-        emit lidarError("Livox SDK启动失败");
-        LivoxLidarSdkUninit();
-        return false;
-    }
+    // 设置回调函数
+    SetLivoxLidarPointCloudCallBack(&LidarManager::onLidarDataCallback, this);
+    SetLivoxLidarInfoCallback(&LidarManager::onLidarInfoCallback, this);
+    SetLivoxLidarInfoChangeCallback(&LidarManager::onLidarPushCallback, this);
     
-    // 设置点云数据回调
-    SetLivoxLidarPointCloudCallBack(
-        [](const uint32_t handle, const uint8_t dev_type, LivoxLidarEthernetPacket* data, void* client_data) {
-            // 增加调试输出，确认回调是否被触发
-            qDebug() << "收到点云数据包: handle=" << handle 
-                     << "类型=" << (int)dev_type 
-                     << "点数=" << (data ? data->dot_num : 0) 
-                     << "帧号=" << (data ? (int)data->frame_cnt : -1);
-            
-            // 将SDK回调转换为我们的回调格式
-            LidarManager* manager = static_cast<LidarManager*>(client_data);
-            if (manager && data) {
-                // 检查数据类型
-                if (data->data_type == kLivoxLidarCartesianCoordinateHighData) {
-                    // 计算完整的数据包大小
-                    uint32_t total_size = sizeof(LivoxLidarEthernetPacket) + 
-                                        data->dot_num * sizeof(LivoxLidarCartesianHighRawPoint);
-                    manager->handleLidarData(handle, reinterpret_cast<const uint8_t*>(data), total_size);
-                } else if (data->data_type == kLivoxLidarImuData) {
-                    // 处理IMU数据
-                    uint32_t total_size = sizeof(LivoxLidarEthernetPacket) + 
-                                       sizeof(LivoxLidarImuRawPoint);
-                    manager->handleImuData(handle, reinterpret_cast<const uint8_t*>(data), total_size);
-                }
-            } else {
-                qDebug() << "点云数据回调参数无效: manager=" << (manager != nullptr) << " data=" << (data != nullptr);
-            }
-        }, 
-        this
-    );
-    
-    // 设置连接状态回调
-    SetLivoxLidarInfoCallback(
-        [](const uint32_t handle, const uint8_t dev_type, const char* info, void* client_data) {
-            // 将SDK回调转换为我们的回调格式
-            LidarManager* manager = static_cast<LidarManager*>(client_data);
-            if (manager && info) {
-                // 这里我们创建一个临时的LivoxLidarInfo结构体
-                LivoxLidarInfo lidarInfo;
-                lidarInfo.dev_type = dev_type;
-                manager->handleLidarInfo(handle, &lidarInfo);
-            }
-        }, 
-        this
-    );
-    
-    // 设置状态推送回调
-    SetLivoxLidarInfoChangeCallback(
-        [](const uint32_t handle, const LivoxLidarInfo* info, void* client_data) {
-            // 将SDK回调转换为我们的回调格式
-            LidarManager* manager = static_cast<LidarManager*>(client_data);
-            if (manager && info) {
-                qDebug() << "设备连接状态变化: " << handle << " SN: " << info->sn;
-                
-                // 设置工作模式为Normal，这是接收点云数据的必要步骤
-                SetLivoxLidarWorkMode(handle, kLivoxLidarNormal, 
-                    [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
-                        qDebug() << "设置工作模式结果: " << status << " handle: " << handle;
-                    }, 
-                    nullptr);
-                
-                // 调用状态变化处理函数
-                manager->handleLidarStatus(handle, kLivoxLidarStateNormal);
-            }
-        }, 
-        this
-    );
-
-    // 配置IMU数据
-    QJsonDocument jsonDoc;
-    if (file.open(QIODevice::ReadOnly)) {
-        jsonDoc = QJsonDocument::fromJson(file.readAll());
-        file.close();
-    }
-
-    if (!jsonDoc.isNull() && jsonDoc.isObject()) {
-        QJsonObject rootObj = jsonDoc.object();
-        
-        // 检查是否启用IMU
-        if (rootObj.contains("FastLio") && rootObj["FastLio"].isObject()) {
-            QJsonObject fastLioObj = rootObj["FastLio"].toObject();
-            if (fastLioObj.contains("use_imu_data")) {
-                bool useImu = fastLioObj["use_imu_data"].toBool();
-                if (useImu) {
-                    enableImu(true);
-                }
-            }
-        }
-    }
-    
-    // 标记为已连接
     connected = true;
-    emit lidarStatusChanged(connected);
+    emit lidarStatusChanged(true);
     
     return true;
 }
 
 void LidarManager::startScan()
 {
-    if (!connected) {
-        emit lidarError("激光雷达未连接，无法开始扫描");
+    QMutexLocker locker(&mutex);
+    
+    if (!connected || scanning) {
         return;
     }
     
-    if (scanning) {
-        // 已经在扫描中
-        return;
+    if (LivoxLidarSdkStart()) {
+        scanning = true;
+    } else {
+        emit lidarError("Failed to start scanning");
     }
-    
-    // 重置帧缓存状态
-    frame_buffer.clear();
-    total_packets_count = 0;
-    first_packet = true;
-    
-    // 启动所有设备
-    uint32_t handle = 50440384; // 使用从日志中看到的实际handle值
-    
-    // 首先确保雷达处于normal工作模式
-    SetLivoxLidarWorkMode(handle, kLivoxLidarNormal, 
-        [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
-            qDebug() << "设置工作模式结果: " << status << " handle: " << handle;
-            
-            if (status == kLivoxLidarStatusSuccess) {
-                // 在回调内部无法直接使用this，改为通过client_data传递
-                LidarManager* manager = static_cast<LidarManager*>(client_data);
-                if (manager) {
-                    // 启用点云发送
-                    livox_status send_status = EnableLivoxLidarPointSend(handle, nullptr, nullptr);
-                    if (send_status == kLivoxLidarStatusSuccess) {
-                        manager->scanning = true;
-                        qDebug() << "激光雷达扫描已启动";
-                        emit manager->lidarStatusChanged(true);
-                    } else {
-                        emit manager->lidarError("启动激光雷达扫描失败，状态码: " + QString::number(send_status));
-                    }
-                }
-            } else {
-                // 这里无法使用emit，因为在静态上下文中
-                qDebug() << "设置工作模式失败，无法开始扫描，状态码: " << status;
-            }
-        }, 
-        this);  // 通过client_data传递this指针
-    
-    qDebug() << "正在设置工作模式并启动扫描...";
 }
 
 void LidarManager::stopScan()
 {
-    if (!connected || !scanning) {
+    QMutexLocker locker(&mutex);
+    
+    if (!scanning) {
         return;
     }
     
-    // 停止所有设备
-    uint32_t handle = 50440384; // 使用相同的handle值
-    livox_status status = DisableLivoxLidarPointSend(handle, nullptr, nullptr);
-    if (status != 0) { // 0表示成功
-        emit lidarError("停止激光雷达扫描失败");
-        return;
-    }
-    
+    LivoxLidarSdkUninit();
     scanning = false;
-    qDebug() << "激光雷达扫描已停止";
+    connected = false;
+    emit lidarStatusChanged(false);
 }
 
 bool LidarManager::isConnected() const
@@ -234,161 +122,141 @@ bool LidarManager::isScanning() const
     return scanning;
 }
 
+bool LidarManager::isImuEnabled() const
+{
+    return imuEnabled;
+}
+
+void LidarManager::enableImu(bool enable)
+{
+    QMutexLocker locker(&mutex);
+    imuEnabled = enable;
+}
+
+void LidarManager::setPointCloudBufferConfig(const PointCloudBuffer::BufferConfig& config)
+{
+    point_cloud_buffer_->updateConfig(config);
+}
+
+PointCloudBuffer::BufferConfig LidarManager::getPointCloudBufferConfig() const
+{
+    return point_cloud_buffer_->getConfig();
+}
+
+size_t LidarManager::getPointCloudBufferSize() const
+{
+    return point_cloud_buffer_->getBufferSize();
+}
+
 void LidarManager::processPointCloud()
 {
-    // 处理最新的点云数据
-    QMutexLocker locker(&mutex);
-    if (!latestCloud->empty()) {
-        emit pointCloudReceived(latestCloud);
+    // 获取时间窗口内的点云数据
+    auto current_time = std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::system_clock::now().time_since_epoch()
+    ).count();
+    
+    auto merged_cloud = point_cloud_buffer_->getPointCloudInTimeWindow(current_time);
+    if (merged_cloud && !merged_cloud->empty()) {
+        emit pointCloudReceived(merged_cloud);
+        emit pointCloudWithTimestamp(merged_cloud, current_time);
     }
 }
 
-// 静态回调函数 - 现在这些函数不再使用，我们使用了lambda替代
-void LidarManager::onLidarDataCallback(uint8_t handle, const uint8_t *data, uint32_t data_num, void *client_data)
+void LidarManager::onBufferSizeChanged(size_t size)
 {
-    LidarManager *manager = static_cast<LidarManager*>(client_data);
-    if (manager) {
-        manager->handleLidarData(handle, data, data_num);
+    emit bufferSizeChanged(size);
+}
+
+void LidarManager::onCompressionCompleted()
+{
+    emit compressionCompleted();
+}
+
+void LidarManager::onFlushCompleted()
+{
+    emit flushCompleted();
+}
+
+void LidarManager::onLidarDataCallback(const uint32_t handle, const uint8_t dev_type, LivoxLidarEthernetPacket* data, void* client_data)
+{
+    auto manager = static_cast<LidarManager*>(client_data);
+    if (manager && data) {
+        manager->handleLidarData(handle, reinterpret_cast<const uint8_t*>(data), data->length);
     }
 }
 
-void LidarManager::onLidarInfoCallback(const uint8_t handle, const LivoxLidarInfo* info, void* client_data)
+void LidarManager::onLidarInfoCallback(const uint32_t handle, const uint8_t dev_type, const char* info, void* client_data)
 {
-    LidarManager *manager = static_cast<LidarManager*>(client_data);
-    if (manager) {
-        manager->handleLidarInfo(handle, info);
+    Q_UNUSED(dev_type);
+    auto manager = static_cast<LidarManager*>(client_data);
+    if (manager && info) {
+        // 这里可以根据需要解析info内容
+        // manager->handleLidarInfo(handle, ...);
     }
 }
 
 void LidarManager::onLidarPushCallback(const uint32_t handle, const LivoxLidarInfo* info, void* client_data)
 {
-    LidarManager *manager = static_cast<LidarManager*>(client_data);
-    if (manager) {
-        if (info) {
-            manager->handleLidarStatus(handle, kLivoxLidarStateNormal);
-        }
+    auto manager = static_cast<LidarManager*>(client_data);
+    if (manager && info) {
+        manager->handleLidarInfo(handle, info);
     }
 }
 
-// 实际处理函数
 void LidarManager::handleLidarData(uint32_t handle, const uint8_t *data, uint32_t data_num)
 {
-    // 解析数据包
-    if (data_num < sizeof(LivoxLidarEthernetPacket)) return;
-    const LivoxLidarEthernetPacket* packet = reinterpret_cast<const LivoxLidarEthernetPacket*>(data);
-
-    if (packet->data_type != kLivoxLidarCartesianCoordinateHighData) return;
-
-    const LivoxLidarCartesianHighRawPoint* points = reinterpret_cast<const LivoxLidarCartesianHighRawPoint*>(packet->data);
-
-    // 累加当前包的所有点
-    for (uint32_t i = 0; i < packet->dot_num; ++i) {
-        frame_buffer.push_back(points[i]);
+    QMutexLocker locker(&mutex);
+    
+    // 转换点云数据
+    auto cloud = convertToPointCloud(data, data_num);
+    if (!cloud || cloud->empty()) {
+        return;
     }
     
-    // 增加包计数
-    total_packets_count++;
+    // 获取当前时间戳
+    auto timestamp = std::chrono::duration_cast<std::chrono::nanoseconds>(
+        std::chrono::system_clock::now().time_since_epoch()
+    ).count();
     
-    // 获取当前时间（毫秒）
-    uint64_t current_time = QDateTime::currentMSecsSinceEpoch();
+    // 添加到缓存
+    point_cloud_buffer_->addPointCloud(cloud, timestamp);
     
-    // 合帧逻辑：满足以下任一条件则发布点云
-    // 1. 帧号变化（原有逻辑）
-    // 2. 累积点数超过阈值
-    // 3. 距离上次发布点云已超过时间阈值
-    bool should_publish = false;
-    
-    if (first_packet) {
-        last_frame_cnt = packet->frame_cnt;
-        last_publish_time = current_time;
-        first_packet = false;
-        return; // 第一个包不发布
-    }
-    
-    if (packet->frame_cnt != last_frame_cnt && !frame_buffer.empty()) {
-        should_publish = true;
-        qDebug() << "帧号变化触发发布:" << (int)last_frame_cnt << "->" << (int)packet->frame_cnt;
-    } else if (frame_buffer.size() >= MAX_POINTS_PER_FRAME) {
-        should_publish = true;
-        qDebug() << "点数达到阈值触发发布:" << frame_buffer.size() << "点";
-    } else if ((current_time - last_publish_time) > 50) { // 减少到50ms，提高帧率
-        should_publish = true;
-        qDebug() << "时间间隔触发发布:" << (current_time - last_publish_time) << "毫秒";
-    }
-    
-    if (should_publish && !frame_buffer.empty()) {
-        // 合成点云
-        pcl::PointCloud<pcl::PointXYZI>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZI>());
-        for (const auto& pt : frame_buffer) {
-            pcl::PointXYZI pcl_pt;
-            pcl_pt.x = pt.x / 1000.0f;
-            pcl_pt.y = pt.y / 1000.0f;
-            pcl_pt.z = pt.z / 1000.0f;
-            pcl_pt.intensity = pt.reflectivity;
-            cloud->push_back(pcl_pt);
-        }
-        cloud->width = cloud->size();
-        cloud->height = 1;
-        cloud->is_dense = true;
-
-        // 提取点云帧采集区间（起始和终止时间戳）
-        uint64_t cloud_start = 0;
-        uint64_t cloud_end = 0;
-        for (int i = 0; i < 8; i++) {
-            cloud_start |= static_cast<uint64_t>(packet->timestamp[i]) << (i * 8);
-        }
-        cloud_end = cloud_start; // 假设单包帧，如有帧持续时间可加上
-
-        // 调用FastLioProcessor的processPointCloudWithTimestamp接口
-        emit pointCloudWithTimestamp(cloud, cloud_start);
-        emit pointCloudReceived(cloud);
-        qDebug() << "合成一帧点云，点数:" << cloud->size() 
-                 << "，包含" << total_packets_count << "个数据包"
-                 << "，耗时:" << (current_time - last_publish_time) << "毫秒"
-                 << "，时间戳区间:[" << cloud_start << ", " << cloud_end << "]";
-        
-        // 重置状态
-        frame_buffer.clear();
-        total_packets_count = 0;
-        last_publish_time = current_time;
-    }
-    
-    last_frame_cnt = packet->frame_cnt;
+    // 更新最新点云
+    latestCloud = cloud;
 }
 
 void LidarManager::handleLidarInfo(uint32_t handle, const LivoxLidarInfo* info)
 {
-    qDebug() << "激光雷达信息:" << "handle=" << handle 
-             << "dev_type=" << info->dev_type;
+    if (!info) {
+        return;
+    }
     
-    // 可以根据需要处理更多的激光雷达信息
+    // 处理雷达信息
+    // TODO: 实现雷达信息处理
 }
 
 void LidarManager::handleLidarStatus(uint32_t handle, LivoxLidarState status)
 {
+    QMutexLocker locker(&mutex);
+    
     switch (status) {
-    case kLivoxLidarStateSampling:
-        qDebug() << "激光雷达状态：正在采样";
-        scanning = true;
-        break;
-    case kLivoxLidarStateDisconnect:
-        qDebug() << "激光雷达状态：已断开";
-        connected = false;
-        scanning = false;
-        emit lidarError("激光雷达连接已断开");
-        emit lidarStatusChanged(false);
-        break;
-    case kLivoxLidarStateError:
-        qDebug() << "激光雷达状态：错误";
-        emit lidarError("激光雷达报告错误");
-        break;
-    case kLivoxLidarStateNormal:
-        qDebug() << "激光雷达状态：正常";
-        break;
-    default:
-        qDebug() << "激光雷达状态：未知状态" << static_cast<int>(status);
-        break;
+        case kLivoxLidarStateNormal:
+            connected = true;
+            break;
+        case kLivoxLidarStateDisconnect:
+            connected = false;
+            scanning = false;
+            break;
+        case kLivoxLidarStateError:
+            connected = false;
+            scanning = false;
+            emit lidarError("Lidar error occurred");
+            break;
+        default:
+            break;
     }
+    
+    emit lidarStatusChanged(connected);
 }
 
 pcl::PointCloud<pcl::PointXYZI>::Ptr LidarManager::convertToPointCloud(const uint8_t *data, uint32_t data_num)
@@ -421,8 +289,8 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr LidarManager::convertToPointCloud(const uin
     }
     
     // 检查数据包大小是否足够
-    uint32_t expected_size = sizeof(LivoxLidarEthernetPacket) + 
-                           packet->dot_num * sizeof(LivoxLidarCartesianHighRawPoint);
+    const size_t header_size = offsetof(LivoxLidarEthernetPacket, data);
+    uint32_t expected_size = header_size + packet->dot_num * sizeof(LivoxLidarCartesianHighRawPoint);
     if (data_num < expected_size) {
         qWarning() << "数据包大小不足，需要:" << expected_size << "实际:" << data_num;
         return cloud;
@@ -466,96 +334,12 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr LidarManager::convertToPointCloud(const uin
     return cloud;
 }
 
-bool LidarManager::isImuEnabled() const 
-{
-    return imuEnabled;
-}
-
-void LidarManager::enableImu(bool enable)
-{
-    if (imuEnabled == enable) {
-        return; // 已经是所需状态
-    }
-
-    imuEnabled = enable;
-    
-    if (!connected) {
-        return; // 未连接时无法设置
-    }
-
-    uint32_t handle = 50440384; // 使用从日志中看到的实际handle值
-    
-    // 使用SDK中正确的函数启用/禁用IMU数据
-    if (enable) {
-        EnableLivoxLidarImuData(handle, 
-            [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
-                if (status == kLivoxLidarStatusSuccess) {
-                    qDebug() << "启用IMU数据成功";
-                } else {
-                    qDebug() << "启用IMU数据失败，状态码: " << status;
-                }
-            }, 
-            nullptr);
-    } else {
-        DisableLivoxLidarImuData(handle, 
-            [](livox_status status, uint32_t handle, LivoxLidarAsyncControlResponse *response, void *client_data) {
-                if (status == kLivoxLidarStatusSuccess) {
-                    qDebug() << "禁用IMU数据成功";
-                } else {
-                    qDebug() << "禁用IMU数据失败，状态码: " << status;
-                }
-            }, 
-            nullptr);
-    }
-    
-    qDebug() << "IMU数据已" << (enable ? "启用" : "禁用");
-}
-
 void LidarManager::handleImuData(uint32_t handle, const uint8_t *data, uint32_t data_num)
 {
     if (!imuEnabled) {
-        return; // IMU未启用，忽略数据
-    }
-    
-    // 解析数据包
-    if (data_num < sizeof(LivoxLidarEthernetPacket) + sizeof(LivoxLidarImuRawPoint)) {
-        qWarning() << "IMU数据包大小不足";
         return;
     }
     
-    const LivoxLidarEthernetPacket* packet = reinterpret_cast<const LivoxLidarEthernetPacket*>(data);
-    const LivoxLidarImuRawPoint* imu_data = reinterpret_cast<const LivoxLidarImuRawPoint*>(packet->data);
-    
-    // 解析时间戳 - 假设时间戳是8字节的
-    uint64_t timestamp = 0;
-    for (int i = 0; i < 8; i++) {
-        timestamp |= static_cast<uint64_t>(packet->timestamp[i]) << (i * 8);
-    }
-    
-    // 更新IMU数据
-    ImuData imuData;
-    imuData.gyro_x = imu_data->gyro_x;
-    imuData.gyro_y = imu_data->gyro_y;
-    imuData.gyro_z = imu_data->gyro_z;
-    imuData.acc_x = imu_data->acc_x;
-    imuData.acc_y = imu_data->acc_y;
-    imuData.acc_z = imu_data->acc_z;
-    imuData.timestamp = timestamp;
-    
-    // 保存最新IMU数据
-    {
-        QMutexLocker locker(&mutex);
-        latestImuData = imuData;
-    }
-    
-    // 发出信号
-    emit imuDataReceived(imuData);
-    
-    qDebug() << "收到IMU数据: gyro(" 
-             << imuData.gyro_x << "," 
-             << imuData.gyro_y << "," 
-             << imuData.gyro_z << ") acc("
-             << imuData.acc_x << ","
-             << imuData.acc_y << ","
-             << imuData.acc_z << ")";
+    // 处理IMU数据
+    // TODO: 实现IMU数据处理
 } 

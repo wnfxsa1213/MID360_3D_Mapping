@@ -106,8 +106,10 @@ message(STATUS "找到PCL: ${PCL_FOUND}, 版本: ${PCL_VERSION}")
 # 添加SDK路径 - 使用新的目录结构
 set(SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/Livox-SDK2")
 set(FAST_LIO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/FAST-LIO")
+set(OH_MY_LOAM_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam")
 message(STATUS "SDK_DIR: ${SDK_DIR}")
 message(STATUS "FAST_LIO_DIR: ${FAST_LIO_DIR}")
+message(STATUS "OH_MY_LOAM_DIR: ${OH_MY_LOAM_DIR}")
 
 # 检查SDK库文件是否存在
 set(SDK_LIB_PATH "${SDK_DIR}/build/sdk_core/Release/livox_lidar_sdk_static.lib")
@@ -124,6 +126,7 @@ include_directories(
     ${FAST_LIO_DIR}/include
     ${PCL_INCLUDE_DIRS}
     ${EIGEN3_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/include/fast_lio
     ${CMAKE_CURRENT_SOURCE_DIR}/include/fastlio2
@@ -132,11 +135,15 @@ include_directories(
     ${Qt6Widgets_INCLUDE_DIRS}
     ${Qt6OpenGLWidgets_INCLUDE_DIRS}
     "D:/vcpkg/installed/x64-windows/include"
-    # 添加源代码目录，以便头文件正确包含
     ${CMAKE_CURRENT_SOURCE_DIR}/src/app
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/lidar
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/slam
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam/common
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam/common/pcl
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam/oh_my_loam
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party/oh_my_loam/oh_my_loam/base
 )
 message(STATUS "已配置include目录")
 
@@ -199,12 +206,23 @@ message(STATUS "PCL_DEFINITIONS: ${PCL_DEFINITIONS}")
 # 添加PCL的定义
 add_definitions(${PCL_DEFINITIONS})
 
+# 在 add_executable 之前添加 oh_my_loam 子目录
+message(STATUS "正在添加 oh_my_loam 子目录...")
+add_subdirectory(third_party/oh_my_loam)
+
 # 添加可执行文件
 add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCES}
     ${RESOURCE_FILES}
 )
 message(STATUS "已配置可执行文件: ${PROJECT_NAME}")
+
+# 开发阶段自动复制 config 目录到输出目录
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_CURRENT_SOURCE_DIR}/config"
+    "$<TARGET_FILE_DIR:${PROJECT_NAME}>/config"
+)
 
 # 手动指定所有需要的PCL库路径
 set(PCL_LIBS_MANUAL "")
@@ -270,6 +288,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${Boost_LIBRARIES})
 # 链接VTK库
 message(STATUS "正在链接VTK库...")
 target_link_libraries(${PROJECT_NAME} PRIVATE ${VTK_LIBRARIES})
+
+# 链接oh_my_loam库
+message(STATUS "正在链接oh_my_loam库...")
+target_link_libraries(${PROJECT_NAME} PRIVATE oh_my_loam_lib)
 
 # 生成qt.conf文件
 file(WRITE "${CMAKE_BINARY_DIR}/qt.conf" "[Paths]\nPlugins = ./plugins\n")

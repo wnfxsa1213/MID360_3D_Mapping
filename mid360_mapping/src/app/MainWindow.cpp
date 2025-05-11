@@ -19,9 +19,14 @@
 #include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkNew.h>
 #include <vtkRenderer.h>
+#include <QComboBox>
+#include <QBoxLayout>
+#include <QLayout>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(nullptr), isScanning(false), autoFollowCamera(true)
+    : QMainWindow(parent), ui(nullptr), isScanning(false), autoFollowCamera(true), 
+      currentAlgorithm(SlamAlgorithm::FastLio), // 初始化为FastLio
+      algorithmSelector(nullptr), algorithmStatusLabel(nullptr)
 {
     try {
         // 初始化点云指针
@@ -52,16 +57,19 @@ MainWindow::MainWindow(QWidget *parent)
         }
         
         try {
-            // 创建激光雷达管理器和Fast-LIO处理器
+            // 创建激光雷达管理器和SLAM处理器
             LOG_INFO("正在创建激光雷达管理器...");
             lidarManager = new LidarManager();
             LOG_INFO("正在创建Fast-LIO处理器...");
             fastLioProcessor = new FastLioProcessor();
+            LOG_INFO("正在创建Oh-My-LOAM处理器...");
+            ohMyLoamProcessor = new OhMyLoamProcessor();
             LOG_INFO("组件创建完成");
             
             // 将管理器和处理器移动到线程中
             lidarManager->moveToThread(&lidarThread);
             fastLioProcessor->moveToThread(&processorThread);
+            ohMyLoamProcessor->moveToThread(&processorThread);
             
             // 连接信号和槽
             LOG_INFO("正在连接信号和槽...");
@@ -193,6 +201,7 @@ MainWindow::~MainWindow()
     // 释放资源
     delete lidarManager;
     delete fastLioProcessor;
+    delete ohMyLoamProcessor;
     delete visualizerTimer;
     
     // 删除UI
@@ -208,6 +217,9 @@ void MainWindow::setupUI()
     // 创建主布局
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
     
+    // 创建左侧布局
+    QVBoxLayout *leftLayout = new QVBoxLayout();
+    
     // 创建分割器
     QSplitter *splitter = new QSplitter(Qt::Horizontal, centralWidget);
     mainLayout->addWidget(splitter);
@@ -215,6 +227,25 @@ void MainWindow::setupUI()
     // 创建控制面板
     QWidget *controlPanel = new QWidget(splitter);
     QVBoxLayout *controlLayout = new QVBoxLayout(controlPanel);
+    
+    // 创建算法选择组
+    QGroupBox *algorithmGroupBox = new QGroupBox("SLAM算法选择", controlPanel);
+    QVBoxLayout *algorithmLayout = new QVBoxLayout(algorithmGroupBox);
+    
+    algorithmSelector = new QComboBox(algorithmGroupBox);
+    algorithmSelector->addItem("Fast-LIO (默认)");
+    algorithmSelector->addItem("Oh-My-LOAM");
+    algorithmSelector->setCurrentIndex(static_cast<int>(currentAlgorithm));
+    
+    // 添加算法状态标签
+    algorithmStatusLabel = new QLabel(getCurrentAlgorithmName(), algorithmGroupBox);
+    algorithmStatusLabel->setStyleSheet("font-weight: bold; color: blue;");
+    
+    algorithmLayout->addWidget(algorithmSelector);
+    algorithmLayout->addWidget(algorithmStatusLabel);
+    
+    // 添加算法选择组到控制布局
+    controlLayout->addWidget(algorithmGroupBox);
     
     // 创建扫描控制组
     QGroupBox *scanGroupBox = new QGroupBox("扫描控制", controlPanel);
@@ -286,7 +317,7 @@ void MainWindow::setupUI()
     // 设置状态栏
     QStatusBar *statusBar = new QStatusBar(this);
     setStatusBar(statusBar);
-    statusBar->showMessage("就绪");
+    statusBar->showMessage(QString("当前SLAM算法: %1").arg(getCurrentAlgorithmName()));
     
     // 连接按钮信号
     connect(startButton, &QPushButton::clicked, this, &MainWindow::onStartScan);
@@ -295,6 +326,10 @@ void MainWindow::setupUI()
     connect(loadMapButton, &QPushButton::clicked, this, &MainWindow::onLoadMap);
     connect(clearMapButton, &QPushButton::clicked, this, &MainWindow::onClearMap);
     connect(configButton, &QPushButton::clicked, this, &MainWindow::onConfigSettings);
+    
+    // 连接算法选择信号
+    connect(algorithmSelector, QOverload<int>::of(&QComboBox::currentIndexChanged), 
+            this, &MainWindow::onAlgorithmChanged);
 }
 
 void MainWindow::connectSignals()
@@ -302,7 +337,7 @@ void MainWindow::connectSignals()
     try {
         LOG_INFO("开始连接激光雷达信号...");
         // 先检查对象是否有效
-        if (!lidarManager || !fastLioProcessor) {
+        if (!lidarManager || !fastLioProcessor || !ohMyLoamProcessor) {
             LOG_ERROR("组件对象为空，无法连接信号");
             throw std::runtime_error("组件对象为空，无法连接信号");
         }
@@ -359,6 +394,18 @@ void MainWindow::connectSignals()
             LOG_FATAL("连接处理器信号时发生未知异常");
             QMessageBox::critical(this, "致命错误", "连接处理器信号时发生未知异常");
         }
+        
+        // 连接FastLioProcessor信号
+        connect(fastLioProcessor, &FastLioProcessor::processFinished, this, &MainWindow::onProcessFinished);
+        connect(fastLioProcessor, &FastLioProcessor::globalMapUpdated, this, &MainWindow::onGlobalMapUpdated);
+        connect(fastLioProcessor, &FastLioProcessor::poseUpdated, this, &MainWindow::onPoseUpdated);
+        connect(fastLioProcessor, &FastLioProcessor::processorError, this, &MainWindow::onProcessorError);
+        
+        // 连接OhMyLoamProcessor信号
+        connect(ohMyLoamProcessor, &OhMyLoamProcessor::processFinished, this, &MainWindow::onProcessFinished);
+        connect(ohMyLoamProcessor, &OhMyLoamProcessor::globalMapUpdated, this, &MainWindow::onGlobalMapUpdated);
+        connect(ohMyLoamProcessor, &OhMyLoamProcessor::poseUpdated, this, &MainWindow::onPoseUpdated);
+        connect(ohMyLoamProcessor, &OhMyLoamProcessor::processorError, this, &MainWindow::onProcessorError);
         
         // 注意：我们在这里不连接定时器信号，而是在创建定时器后再连接
         LOG_INFO("信号和槽连接部分完成，定时器信号将在创建定时器后连接");
@@ -436,6 +483,58 @@ void MainWindow::loadConfigFile()
             return;
         }
         LOG_INFO("配置文件存在");
+        
+        // 从配置文件中读取设置
+        QFile file(configFilePath);
+        if (file.open(QIODevice::ReadOnly)) {
+            QByteArray fileData = file.readAll();
+            file.close();
+            
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject rootObj = jsonDoc.object();
+                
+                // 读取当前算法设置
+                if (rootObj.contains("current_slam_algorithm")) {
+                    QString algStr = rootObj["current_slam_algorithm"].toString();
+                    if (algStr == "OhMyLoam") {
+                        currentAlgorithm = SlamAlgorithm::OhMyLoam;
+                    } else {
+                        currentAlgorithm = SlamAlgorithm::FastLio;
+                    }
+                    
+                    // 更新算法选择器
+                    if (algorithmSelector) {
+                        algorithmSelector->setCurrentIndex(static_cast<int>(currentAlgorithm));
+                    }
+                    
+                    // 更新算法状态标签
+                    if (algorithmStatusLabel) {
+                        algorithmStatusLabel->setText(getCurrentAlgorithmName());
+                    }
+                }
+                
+                // 读取IMU设置
+                if (rootObj.contains("FastLio") && rootObj["FastLio"].isObject()) {
+                    QJsonObject fastLioObj = rootObj["FastLio"].toObject();
+                    if (fastLioObj.contains("use_imu_data")) {
+                        useImuData = fastLioObj["use_imu_data"].toBool();
+                        LOG_INFO(QString("FastLio IMU配置: %1").arg(useImuData ? "启用" : "禁用"));
+                    }
+                }
+                
+                if (rootObj.contains("OhMyLoam") && rootObj["OhMyLoam"].isObject()) {
+                    QJsonObject loamObj = rootObj["OhMyLoam"].toObject();
+                    if (loamObj.contains("use_imu_data")) {
+                        // 如果Oh-My-LOAM有特定的IMU配置，读取它
+                        if (currentAlgorithm == SlamAlgorithm::OhMyLoam) {
+                            useImuData = loamObj["use_imu_data"].toBool();
+                            LOG_INFO(QString("OhMyLoam IMU配置: %1").arg(useImuData ? "启用" : "禁用"));
+                        }
+                    }
+                }
+            }
+        }
         
         LOG_INFO("检查组件对象...");
         // 确保组件对象已创建
@@ -548,6 +647,13 @@ void MainWindow::loadConfigFile()
         }
         LOG_INFO("Fast-LIO处理器初始化成功");
         
+        // 初始化Oh-My-LOAM处理器
+        if (!ohMyLoamProcessor->initialize(configFilePath)) {
+            LOG_ERROR("初始化Oh-My-LOAM处理器失败");
+            LOG_WARNING("Oh-My-LOAM初始化失败，但不影响Fast-LIO使用");
+            // 不抛出异常，允许Oh-My-LOAM初始化失败
+        }
+        
         LOG_INFO("配置文件加载和组件初始化完成");
     } catch (const std::exception& e) {
         LOG_ERROR(QString("加载配置文件时发生异常: %1").arg(e.what()));
@@ -562,37 +668,169 @@ void MainWindow::loadConfigFile()
 
 void MainWindow::saveConfigFile()
 {
-    // 保存配置文件的实现
-    // 这里需要根据实际情况保存配置参数
+    // 保存配置文件
+    try {
+        QFile file(configFilePath);
+        if (file.open(QIODevice::ReadOnly)) {
+            QByteArray fileData = file.readAll();
+            file.close();
+            
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(fileData);
+            if (!jsonDoc.isNull() && jsonDoc.isObject()) {
+                QJsonObject rootObj = jsonDoc.object();
+                
+                // 添加或更新当前算法设置
+                rootObj["current_slam_algorithm"] = (currentAlgorithm == SlamAlgorithm::OhMyLoam) ? 
+                    "OhMyLoam" : "FastLio";
+                
+                // 写回文件
+                if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+                    file.write(QJsonDocument(rootObj).toJson());
+                    file.close();
+                    LOG_INFO("配置文件已更新");
+                } else {
+                    LOG_ERROR("无法写入配置文件: " + file.errorString());
+                }
+            }
+        }
+    } catch (const std::exception& e) {
+        LOG_ERROR(QString("保存配置文件时发生异常: %1").arg(e.what()));
+    } catch (...) {
+        LOG_ERROR("保存配置文件时发生未知异常");
+    }
 }
 
 void MainWindow::onStartScan()
 {
-    if (!isScanning) {
-        if (!lidarManager->isConnected()) {
-            // 重新尝试连接激光雷达
-            if (!lidarManager->initialize(configFilePath)) {
-                statusBar()->showMessage("激光雷达连接失败");
-                QMessageBox::critical(this, "错误", "无法连接激光雷达，请检查配置");
-                return;
-            }
+    if (isScanning) {
+        // 已经在扫描中，不需要重复操作
+        return;
+    }
+
+    // 检查激光雷达连接状态
+    if (!lidarManager->isConnected()) {
+        // 重新尝试连接激光雷达
+        if (!lidarManager->initialize(configFilePath)) {
+            statusBar()->showMessage("激光雷达连接失败");
+            QMessageBox::critical(this, "错误", "无法连接激光雷达，请检查配置");
+            return;
         }
+    }
+    
+    // 先断开之前可能的连接，确保信号不会重复连接
+    lidarManager->disconnect(fastLioProcessor);
+    lidarManager->disconnect(ohMyLoamProcessor);
+    
+    // 根据当前选择的算法，连接点云信号
+    switch(currentAlgorithm) {
+    case SlamAlgorithm::FastLio:
+        LOG_INFO("使用Fast-LIO算法开始扫描");
+        statusBar()->showMessage("使用Fast-LIO算法开始扫描");
         
-        // 开始扫描
+        // 连接点云数据信号
+        connect(lidarManager, &LidarManager::pointCloudReceived, 
+                fastLioProcessor, &FastLioProcessor::processPointCloud);
+                
+        // 连接带时间戳的点云信号
+        connect(lidarManager, &LidarManager::pointCloudWithTimestamp,
+                fastLioProcessor, &FastLioProcessor::processPointCloudWithTimestamp);
+        
+        // Fast-LIO通常需要IMU数据
+        if (useImuData) {
+            connect(lidarManager, &LidarManager::imuDataReceived,
+                    fastLioProcessor, &FastLioProcessor::processImuData);
+        }
+        break;
+        
+    case SlamAlgorithm::OhMyLoam:
+        LOG_INFO("使用Oh-My-LOAM算法开始扫描");
+        statusBar()->showMessage("使用Oh-My-LOAM算法开始扫描");
+        
+        // 连接点云数据信号
+        connect(lidarManager, &LidarManager::pointCloudReceived, 
+                ohMyLoamProcessor, &OhMyLoamProcessor::processPointCloud);
+                
+        // 连接带时间戳的点云信号
+        connect(lidarManager, &LidarManager::pointCloudWithTimestamp,
+                ohMyLoamProcessor, &OhMyLoamProcessor::processPointCloudWithTimestamp);
+        
+        // Oh-My-LOAM通常不需要IMU数据，但如果配置了使用，仍然连接
+        if (useImuData) {
+            connect(lidarManager, &LidarManager::imuDataReceived,
+                    ohMyLoamProcessor, &OhMyLoamProcessor::processImuData);
+        }
+        break;
+    }
+    
+    // 无论使用哪种算法，都连接可视化需要的信号
+    connect(lidarManager, &LidarManager::pointCloudReceived, 
+            this, &MainWindow::onPointCloudReceived);
+    
+    // 开始扫描 - 修复：移除if条件判断，因为startScan()返回void
+    try {
         lidarManager->startScan();
         isScanning = true;
-        statusBar()->showMessage("开始扫描");
+        LOG_INFO("激光雷达扫描已开始");
+    } catch (const std::exception& e) {
+        statusBar()->showMessage(QString("激光雷达扫描启动失败: %1").arg(e.what()));
+        QMessageBox::warning(this, "警告", QString("启动扫描失败: %1").arg(e.what()));
+        
+        // 断开刚刚连接的信号
+        disconnectLidarSignals();
+    } catch (...) {
+        statusBar()->showMessage("激光雷达扫描启动失败");
+        QMessageBox::warning(this, "警告", "启动扫描失败，发生未知错误");
+        
+        // 断开刚刚连接的信号
+        disconnectLidarSignals();
     }
 }
 
 void MainWindow::onStopScan()
 {
-    if (isScanning) {
-        // 停止扫描
-        lidarManager->stopScan();
-        isScanning = false;
-        statusBar()->showMessage("停止扫描");
+    if (!isScanning) {
+        return; // 未在扫描，不需要操作
     }
+    
+    // 停止扫描 - 修复：移除if条件判断，因为stopScan()返回void
+    try {
+        lidarManager->stopScan();
+        LOG_INFO("激光雷达扫描已停止");
+    } catch (const std::exception& e) {
+        LOG_WARNING(QString("停止激光雷达扫描时发生异常: %1").arg(e.what()));
+    } catch (...) {
+        LOG_WARNING("停止激光雷达扫描时发生未知异常");
+    }
+    
+    // 断开所有点云和IMU信号连接
+    disconnectLidarSignals();
+    
+    isScanning = false;
+    statusBar()->showMessage(QString("停止扫描 - 当前算法: %1").arg(getCurrentAlgorithmName()));
+}
+
+// 添加辅助方法，用于断开所有激光雷达信号连接
+void MainWindow::disconnectLidarSignals()
+{
+    // 断开与FastLioProcessor的连接
+    lidarManager->disconnect(SIGNAL(pointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr)),
+                          fastLioProcessor, SLOT(processPointCloud(pcl::PointCloud<pcl::PointXYZI>::Ptr)));
+    lidarManager->disconnect(SIGNAL(pointCloudWithTimestamp(pcl::PointCloud<pcl::PointXYZI>::Ptr, uint64_t)),
+                          fastLioProcessor, SLOT(processPointCloudWithTimestamp(pcl::PointCloud<pcl::PointXYZI>::Ptr, uint64_t)));
+    lidarManager->disconnect(SIGNAL(imuDataReceived(const ImuData&)),
+                          fastLioProcessor, SLOT(processImuData(const ImuData&)));
+    
+    // 断开与OhMyLoamProcessor的连接
+    lidarManager->disconnect(SIGNAL(pointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr)),
+                          ohMyLoamProcessor, SLOT(processPointCloud(pcl::PointCloud<pcl::PointXYZI>::Ptr)));
+    lidarManager->disconnect(SIGNAL(pointCloudWithTimestamp(pcl::PointCloud<pcl::PointXYZI>::Ptr, uint64_t)),
+                          ohMyLoamProcessor, SLOT(processPointCloudWithTimestamp(pcl::PointCloud<pcl::PointXYZI>::Ptr, uint64_t)));
+    lidarManager->disconnect(SIGNAL(imuDataReceived(const ImuData&)),
+                          ohMyLoamProcessor, SLOT(processImuData(const ImuData&)));
+    
+    // 断开与MainWindow的连接
+    lidarManager->disconnect(SIGNAL(pointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr)),
+                          this, SLOT(onPointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr)));
 }
 
 void MainWindow::onSaveMap()
@@ -606,7 +844,19 @@ void MainWindow::onSaveMap()
                                                   qApp->applicationDirPath(), 
                                                   "PCD文件 (*.pcd);;所有文件 (*)");
     if (!fileName.isEmpty()) {
-        if (fastLioProcessor->saveMap(fileName)) {
+        bool result = false;
+        
+        // 根据当前算法选择相应的处理器保存地图
+        switch(currentAlgorithm) {
+        case SlamAlgorithm::FastLio:
+            result = fastLioProcessor->saveMap(fileName);
+            break;
+        case SlamAlgorithm::OhMyLoam:
+            result = ohMyLoamProcessor->saveMap(fileName);
+            break;
+        }
+        
+        if (result) {
             statusBar()->showMessage("地图已保存: " + fileName);
         } else {
             statusBar()->showMessage("地图保存失败");
@@ -621,7 +871,19 @@ void MainWindow::onLoadMap()
                                                   qApp->applicationDirPath(), 
                                                   "PCD文件 (*.pcd);;所有文件 (*)");
     if (!fileName.isEmpty()) {
-        if (fastLioProcessor->loadMap(fileName)) {
+        bool result = false;
+        
+        // 根据当前算法选择相应的处理器加载地图
+        switch(currentAlgorithm) {
+        case SlamAlgorithm::FastLio:
+            result = fastLioProcessor->loadMap(fileName);
+            break;
+        case SlamAlgorithm::OhMyLoam:
+            result = ohMyLoamProcessor->loadMap(fileName);
+            break;
+        }
+        
+        if (result) {
             statusBar()->showMessage("地图已加载: " + fileName);
         } else {
             statusBar()->showMessage("地图加载失败");
@@ -637,8 +899,15 @@ void MainWindow::onClearMap()
                                                                "确定要清除当前地图吗？", 
                                                                QMessageBox::Yes | QMessageBox::No);
         if (reply == QMessageBox::Yes) {
-            // 重置处理器
-            fastLioProcessor->reset();
+            // 根据当前算法重置对应的处理器
+            switch(currentAlgorithm) {
+            case SlamAlgorithm::FastLio:
+                fastLioProcessor->reset();
+                break;
+            case SlamAlgorithm::OhMyLoam:
+                ohMyLoamProcessor->reset();
+                break;
+            }
             
             // 清空全局地图
             QMutexLocker locker(&cloudMutex);
@@ -914,4 +1183,69 @@ void MainWindow::onPointCloudReceived(pcl::PointCloud<pcl::PointXYZI>::Ptr cloud
 {
     // 更新当前点云用于可视化
     currentCloud = cloud;
+}
+
+// 添加算法切换槽函数
+void MainWindow::onAlgorithmChanged(int index)
+{
+    // 如果正在扫描，先停止
+    bool wasScanning = isScanning;
+    if (wasScanning) {
+        onStopScan();
+    }
+    
+    // 更新算法类型
+    currentAlgorithm = static_cast<SlamAlgorithm>(index);
+    
+    // 更新算法状态标签
+    if (algorithmStatusLabel) {
+        algorithmStatusLabel->setText(getCurrentAlgorithmName());
+    }
+    
+    // 更新状态栏
+    QString algorithmName = getCurrentAlgorithmName();
+    statusBar()->showMessage(QString("当前SLAM算法: %1").arg(algorithmName));
+    
+    // 更新UI以反映当前算法
+    updateUIForCurrentAlgorithm();
+    
+    // 保存当前选择到配置文件
+    saveConfigFile();
+    
+    LOG_INFO(QString("SLAM算法已切换为: %1").arg(algorithmName));
+    QMessageBox::information(this, "算法切换", QString("SLAM算法已切换为: %1").arg(algorithmName));
+    
+    // 如果之前正在扫描，重新开始
+    if (wasScanning) {
+        onStartScan();
+    }
+}
+
+// 获取当前算法名称
+QString MainWindow::getCurrentAlgorithmName() const
+{
+    switch(currentAlgorithm) {
+    case SlamAlgorithm::FastLio:
+        return "Fast-LIO";
+    case SlamAlgorithm::OhMyLoam:
+        return "Oh-My-LOAM";
+    default:
+        return "未知算法";
+    }
+}
+
+// 更新UI以反映当前算法
+void MainWindow::updateUIForCurrentAlgorithm()
+{
+    switch(currentAlgorithm) {
+    case SlamAlgorithm::FastLio:
+        // Fast-LIO相关UI调整
+        // 例如：启用IMU相关设置
+        break;
+        
+    case SlamAlgorithm::OhMyLoam:
+        // Oh-My-LOAM相关UI调整
+        // 例如：禁用IMU相关设置
+        break;
+    }
 } 

@@ -53,6 +53,16 @@
     "imu_gravity_cov": 0.001
   },
   
+  "OhMyLoam": {
+    "map_resolution": 0.2,
+    "use_imu_data": false,
+    "scan_period": 0.1,
+    "scan_line": 6,
+    "edge_threshold": 1.0,
+    "surf_threshold": 0.1,
+    "nearest_feature_search_dist": 5.0
+  },
+  
   "Visualization": {
     "point_size": 1,
     "background_color": [0.1, 0.1, 0.1],
